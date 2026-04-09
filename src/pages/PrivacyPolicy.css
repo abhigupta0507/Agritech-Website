@@ -1,0 +1,208 @@
+.privacy-hero {
+  background: var(--slate);
+  padding: 80px 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.privacy-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(26,122,110,0.15), transparent 60%);
+}
+
+.privacy-hero > * { position: relative; z-index: 1; }
+
+.privacy-hero h1 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--white);
+  margin: 16px 0 20px;
+}
+
+.privacy-hero p {
+  color: rgba(255,255,255,0.6);
+  font-size: 1.05rem;
+  margin-bottom: 28px;
+}
+
+.privacy-meta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.privacy-meta span {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.06);
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Layout */
+.privacy-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+  align-items: start;
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+/* Sidebar */
+.privacy-sidebar {
+  position: sticky;
+  top: 90px;
+  padding-right: 40px;
+}
+
+.sidebar-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.sidebar-link {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  padding: 9px 14px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+
+.sidebar-link:hover {
+  color: var(--teal);
+  background: var(--teal-pale);
+  border-left-color: var(--teal);
+}
+
+.sidebar-link.active {
+  color: var(--teal);
+  background: var(--teal-pale);
+  border-left-color: var(--teal);
+  font-weight: 500;
+}
+
+/* Content */
+.privacy-content { min-width: 0; }
+
+.privacy-intro {
+  background: var(--teal-pale);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  border-left: 4px solid var(--teal);
+}
+
+.privacy-intro p {
+  color: var(--teal-dark);
+  line-height: 1.78;
+  font-size: 0.95rem;
+}
+
+.privacy-section {
+  margin-bottom: 52px;
+  scroll-margin-top: 90px;
+}
+
+.privacy-section h2 {
+  font-size: 1.3rem;
+  color: var(--slate);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--cream-dark);
+}
+
+.privacy-body {
+  color: var(--text-mid);
+  line-height: 1.8;
+  font-size: 0.92rem;
+}
+
+.privacy-body p { margin-bottom: 10px; }
+
+.privacy-body h4 {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--slate);
+  margin: 20px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.privacy-body li {
+  list-style: none;
+  padding: 5px 0 5px 20px;
+  position: relative;
+  color: var(--text-mid);
+}
+
+.privacy-body li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-size: 0.85rem;
+}
+
+.privacy-body strong { color: var(--slate); }
+
+/* Contact box */
+.privacy-contact {
+  background: var(--slate);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  margin-top: 48px;
+}
+
+.privacy-contact h3 {
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.privacy-contact p {
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 28px;
+}
+
+.contact-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-row .btn-outline {
+  border-color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
+}
+
+.contact-row .btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+}
+
+@media (max-width: 900px) {
+  .privacy-layout { grid-template-columns: 1fr; }
+  .privacy-sidebar { position: static; padding: 0; margin-bottom: 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .sidebar-title { width: 100%; }
+  .sidebar-link { padding: 6px 12px; background: var(--white); border: 1px solid var(--cream-dark); border-radius: 50px; border-left: 1px solid var(--cream-dark); font-size: 0.75rem; }
+  .sidebar-link.active { border-color: var(--teal); }
+}
