@@ -28,7 +28,7 @@ export default function Footer() {
 
           <div className="footer-col">
             <h4>Contact</h4>
-            <a href="mailto:support@agritech.in">support@agritech.in</a>
+            <a href="mailto:support@agritech.in">fasalrath@agritechiitbhu.in</a>
             <a href="tel:+911800AGRI">1800-AGRI-HELP</a>
             <a href="#">Download App</a>
             <a href="#">Report an Issue</a>
