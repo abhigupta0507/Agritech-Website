@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -36,6 +37,9 @@ export default function Navbar() {
               </NavLink>
             </li>
           ))}
+          <li>
+            <LanguageSwitcher />
+          </li>
           <li>
             <strong>
               <a href="#download" className="nav-cta">
@@ -74,6 +78,8 @@ export default function Navbar() {
             {l.label}
           </NavLink>
         ))}
+
+        <LanguageSwitcher />
         <a
           href="#download"
           className="btn btn-primary"

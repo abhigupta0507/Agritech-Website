@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import BannerBg1 from "../static/images/sandy-zebua-a7n65pmnJ4Q-unsplash.jpg";
 import BannerBg2 from "../static/images/pexels-josh-hild-1270765-14227485.jpg";
+import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -108,6 +109,7 @@ const profiles = [
 
 export default function Home() {
   const heroRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -144,7 +146,7 @@ export default function Home() {
               <div className="banner-container">
                 <div className="banner-content-wrapper">
                   <h1 className="banner-title">
-                    AgriTech, the future of agriculture.
+                    {t("AgriTech, the future of agriculture.")}
                   </h1>
                   <div className="banner-button-container">
                     {/* Using your existing button classes for consistency */}

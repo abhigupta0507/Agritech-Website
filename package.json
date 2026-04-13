@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "extract": "npx i18next-parser"
   },
   "browserslist": {
     "production": [
@@ -26,5 +27,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "i18next-parser": "^9.0.2"
   }
 }
