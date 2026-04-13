@@ -82,8 +82,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
   color: var(--text-mid);
   letter-spacing: 0.02em;
   position: relative;
-  padding-bottom: 2px;
   transition: color 0.2s;
+  padding: 15px;
 }
 
 .nav-links a::after {
@@ -354,7 +354,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
