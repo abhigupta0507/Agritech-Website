@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -13,10 +15,10 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { to: "/", label: "Home" },
-    { to: "/how-it-works", label: "How It Works" },
-    { to: "/about", label: "About Us" },
-    { to: "/privacy", label: "Privacy" },
+    { to: "/", label: t("Home") },
+    { to: "/how-it-works", label: t("How It Works") },
+    { to: "/about", label: t("About Us") },
+    { to: "/privacy", label: t("Privacy") },
   ];
 
   return (
@@ -43,7 +45,7 @@ export default function Navbar() {
           <li>
             <strong>
               <a href="#download" className="nav-cta">
-                Download App
+                {t("Download App")}
               </a>
             </strong>
           </li>
@@ -86,7 +88,7 @@ export default function Navbar() {
           style={{ width: "fit-content" }}
           onClick={() => setMenuOpen(false)}
         >
-          Download App
+          {t("Download App")}
         </a>
       </div>
     </>
