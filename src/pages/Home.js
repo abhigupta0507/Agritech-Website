@@ -6,110 +6,122 @@ import { Pagination, Autoplay } from "swiper/modules";
 import BannerBg1 from "../static/images/sandy-zebua-a7n65pmnJ4Q-unsplash.jpg";
 import BannerBg2 from "../static/images/pexels-josh-hild-1270765-14227485.jpg";
 import { useTranslation } from "react-i18next";
-
 import "swiper/css";
 import "swiper/css/pagination";
-
-const stats = [
-  { value: "140M+", label: "Farmers in India" },
-  { value: "4", label: "User Profiles" },
-  { value: "30+", label: "Crops Supported" },
-  { value: "3", label: "Languages" },
-];
-
-const features = [
-  {
-    icon: "🌾",
-    color: "teal",
-    title: "Smart Farming",
-    desc: "Field management, IoT sensors & AI-powered weather alerts tailored for your farm.",
-  },
-  {
-    icon: "⚖️",
-    color: "rust",
-    title: "Live Marketplace",
-    desc: "Spot market bidding, pre-harvest contracts & real-time auction deals — no middlemen.",
-  },
-  {
-    icon: "🛒",
-    color: "olive",
-    title: "Agri-Input Store",
-    desc: "Seeds, equipment & machinery rentals from verified vendors, all in one place.",
-  },
-  {
-    icon: "🏛️",
-    color: "slate",
-    title: "Govt Integration",
-    desc: "Quality grading, QR-linked AGMARK certificates & MSP procurement — fully digital.",
-  },
-  {
-    icon: "✦",
-    color: "teal",
-    title: "AI Intelligence",
-    desc: "Price forecasting via ML, crop recommendations & profit prediction for smarter decisions.",
-  },
-  {
-    icon: "🗣️",
-    color: "rust",
-    title: "Multi-Language",
-    desc: "Full support for English, Hindi, and Bhojpuri — truly built for every farmer in Bharat.",
-  },
-];
-
-const profiles = [
-  {
-    role: "Farmer",
-    color: "#1a7a6e",
-    emoji: "👨‍🌾",
-    perks: [
-      "Field & crop management",
-      "AI price forecasting",
-      "Quality certification",
-      "Sell via auction or MSP",
-      "Earn points & badges",
-    ],
-  },
-  {
-    role: "Buyer",
-    color: "#c0533a",
-    emoji: "🏢",
-    perks: [
-      "Browse certified harvests",
-      "Live bidding room",
-      "Pre-harvest contracts",
-      "Spot market deals",
-      "Manage fulfillment",
-    ],
-  },
-  {
-    role: "Vendor",
-    color: "#3d5a80",
-    emoji: "🚜",
-    perks: [
-      "List seeds & tools",
-      "Machinery rentals",
-      "Manage orders",
-      "Track payments",
-      "GST-verified profile",
-    ],
-  },
-  {
-    role: "Government",
-    color: "#6b7c3a",
-    emoji: "🏛️",
-    perks: [
-      "Issue QR certificates",
-      "Quality grading",
-      "MSP price management",
-      "Employee management",
-      "Admin dashboard",
-    ],
-  },
-];
 
 export default function Home() {
   const heroRef = useRef(null);
   const { t } = useTranslation();
+
+  // Moved arrays inside the component to access the `t` function
+  const stats = [
+    { value: "140M+", label: t("Farmers in India") },
+    { value: "4", label: t("User Profiles") },
+    { value: "30+", label: t("Crops Supported") },
+    { value: "3", label: t("Languages") },
+  ];
+
+  const features = [
+    {
+      icon: "🌾",
+      color: "teal",
+      title: t("Smart Farming"),
+      desc: t(
+        "Field management, IoT sensors & AI-powered weather alerts tailored for your farm.",
+      ),
+    },
+    {
+      icon: "⚖️",
+      color: "rust",
+      title: t("Live Marketplace"),
+      desc: t(
+        "Spot market bidding, pre-harvest contracts & real-time auction deals — no middlemen.",
+      ),
+    },
+    {
+      icon: "🛒",
+      color: "olive",
+      title: t("Agri-Input Store"),
+      desc: t(
+        "Seeds, equipment & machinery rentals from verified vendors, all in one place.",
+      ),
+    },
+    {
+      icon: "🏛️",
+      color: "slate",
+      title: t("Govt Integration"),
+      desc: t(
+        "Quality grading, QR-linked AGMARK certificates & MSP procurement — fully digital.",
+      ),
+    },
+    {
+      icon: "✦",
+      color: "teal",
+      title: t("AI Intelligence"),
+      desc: t(
+        "Price forecasting via ML, crop recommendations & profit prediction for smarter decisions.",
+      ),
+    },
+    {
+      icon: "🗣️",
+      color: "rust",
+      title: t("Multi-Language"),
+      desc: t(
+        "Full support for English, Hindi, and Bhojpuri — truly built for every farmer in Bharat.",
+      ),
+    },
+  ];
+
+  const profiles = [
+    {
+      role: t("Farmer"),
+      color: "#1a7a6e",
+      emoji: "👨‍🌾",
+      perks: [
+        t("Field & crop management"),
+        t("AI price forecasting"),
+        t("Quality certification"),
+        t("Sell via auction or MSP"),
+        t("Earn points & badges"),
+      ],
+    },
+    {
+      role: t("Buyer"),
+      color: "#c0533a",
+      emoji: "🏢",
+      perks: [
+        t("Browse certified harvests"),
+        t("Live bidding room"),
+        t("Pre-harvest contracts"),
+        t("Spot market deals"),
+        t("Manage fulfillment"),
+      ],
+    },
+    {
+      role: t("Vendor"),
+      color: "#3d5a80",
+      emoji: "🚜",
+      perks: [
+        t("List seeds & tools"),
+        t("Machinery rentals"),
+        t("Manage orders"),
+        t("Track payments"),
+        t("GST-verified profile"),
+      ],
+    },
+    {
+      role: t("Government"),
+      color: "#6b7c3a",
+      emoji: "🏛️",
+      perks: [
+        t("Issue QR certificates"),
+        t("Quality grading"),
+        t("MSP price management"),
+        t("Employee management"),
+        t("Admin dashboard"),
+      ],
+    },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -149,14 +161,13 @@ export default function Home() {
                     {t("AgriTech, the future of agriculture.")}
                   </h1>
                   <div className="banner-button-container">
-                    {/* Using your existing button classes for consistency */}
                     <a
                       className="btn btn-primary"
                       href="https://play.google.com/store/apps"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Download app
+                      {t("Download app")}
                     </a>
                   </div>
                 </div>
@@ -177,11 +188,11 @@ export default function Home() {
               <div className="banner-container">
                 <div className="banner-content-wrapper">
                   <h1 className="banner-title">
-                    AgriTech Bazaar, agri-input marketplace.
+                    {t("AgriTech Bazaar, agri-input marketplace.")}
                   </h1>
                   <div className="banner-button-container">
                     <Link to="/krishi-bazar" className="btn btn-primary">
-                      Explore now
+                      {t("Explore now")}
                     </Link>
                   </div>
                 </div>
@@ -220,31 +231,33 @@ export default function Home() {
 
         <div className="hero-content">
           <div className="hero-label">
-            <span className="chip chip-teal">🌱 2026 · Built for Bharat</span>
+            <span className="chip chip-teal">
+              🌱 {t("2026 · Built for Bharat")}
+            </span>
           </div>
           <h1 className="hero-title">
-            One Platform for
+            {t("One Platform for")}
             <br />
-            <em>India's Entire</em>
+            <em>{t("India's Entire")}</em>
             <br />
-            Agri Ecosystem
+            {t("Agri Ecosystem")}
           </h1>
           <p className="hero-sub">
-            Connecting farmers, buyers, vendors & government on a single
-            intelligent platform — with AI, IoT & live markets, all in your
-            language.
+            {t(
+              "Connecting farmers, buyers, vendors & government on a single intelligent platform — with AI, IoT & live markets, all in your language.",
+            )}
           </p>
           <div className="hero-actions">
             <Link to="/how-it-works" className="btn btn-primary">
-              See How It Works →
+              {t("See How It Works →")}
             </Link>
             <Link to="/about" className="btn btn-outline">
-              Our Story
+              {t("Our Story")}
             </Link>
           </div>
 
           <div className="hero-profiles">
-            {["Farmer", "Buyer", "Vendor", "Govt"].map((p, i) => (
+            {[t("Farmer"), t("Buyer"), t("Vendor"), t("Govt")].map((p, i) => (
               <div
                 key={p}
                 className="profile-chip"
@@ -261,39 +274,39 @@ export default function Home() {
             <div className="phone-screen">
               <div className="screen-header">
                 <div className="screen-dot" />
-                <span>AgriTech</span>
+                <span>{t("AgriTech")}</span>
                 <span style={{ fontSize: "0.7rem", opacity: 0.6 }}>🌱</span>
               </div>
               <div className="screen-card teal">
-                <div>🌾 North Field — 20 acres</div>
+                <div>🌾 {t("North Field — 20 acres")}</div>
                 <div
                   style={{ fontSize: "0.75rem", opacity: 0.8, marginTop: 4 }}
                 >
-                  Paddy · Harvest ready
+                  {t("Paddy · Harvest ready")}
                 </div>
               </div>
               <div className="screen-stat-row">
                 <div className="screen-stat">
-                  <div>₹2,338</div>
-                  <div>Current MSP</div>
+                  <div>{t("₹2,338")}</div>
+                  <div>{t("Current MSP")}</div>
                 </div>
                 <div className="screen-stat">
-                  <div style={{ color: "#1a7a6e" }}>↑ 93.8%</div>
-                  <div>Forecast Acc.</div>
+                  <div style={{ color: "#1a7a6e" }}>{t("↑ 93.8%")}</div>
+                  <div>{t("Forecast Acc.")}</div>
                 </div>
               </div>
               <div className="screen-card rust">
-                <div>⚡ Live Auction Active</div>
+                <div>⚡ {t("Live Auction Active")}</div>
                 <div
                   style={{ fontSize: "0.75rem", opacity: 0.8, marginTop: 4 }}
                 >
-                  Arhar (Tur) · 250 quintal
+                  {t("Arhar (Tur) · 250 quintal")}
                 </div>
               </div>
               <div className="screen-badge-row">
-                <div className="screen-badge">🏆 Bronze</div>
-                <div className="screen-badge">250 pts</div>
-                <div className="screen-badge">📜 AGMARK</div>
+                <div className="screen-badge">🏆 {t("Bronze")}</div>
+                <div className="screen-badge">{t("250 pts")}</div>
+                <div className="screen-badge">📜 {t("AGMARK")}</div>
               </div>
             </div>
           </div>
@@ -315,11 +328,12 @@ export default function Home() {
       <section style={{ padding: "96px 5%", background: "var(--cream)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="reveal">
-            <span className="section-label">Platform Features</span>
-            <h2 className="section-title">End-to-End Agri Ecosystem</h2>
+            <span className="section-label">{t("Platform Features")}</span>
+            <h2 className="section-title">{t("End-to-End Agri Ecosystem")}</h2>
             <p className="section-sub">
-              Every tool a modern farmer needs — from sowing to selling, in one
-              app.
+              {t(
+                "Every tool a modern farmer needs — from sowing to selling, in one app.",
+              )}
             </p>
           </div>
           <div className="features-grid reveal">
@@ -341,16 +355,17 @@ export default function Home() {
             className="reveal"
             style={{ textAlign: "center", marginBottom: 56 }}
           >
-            <span className="section-label">Who It's For</span>
+            <span className="section-label">{t("Who It's For")}</span>
             <h2 className="section-title" style={{ color: "var(--white)" }}>
-              4 Profiles, 1 Platform
+              {t("4 Profiles, 1 Platform")}
             </h2>
             <p
               className="section-sub"
               style={{ color: "rgba(255,255,255,0.6)", margin: "0 auto" }}
             >
-              Every stakeholder in the agriculture chain gets their own
-              dedicated experience.
+              {t(
+                "Every stakeholder in the agriculture chain gets their own dedicated experience.",
+              )}
             </p>
           </div>
           <div className="profiles-grid reveal">
@@ -386,8 +401,8 @@ export default function Home() {
           }}
         >
           <div className="reveal">
-            <span className="section-label">Gamification</span>
-            <h2 className="section-title">Learn. Earn. Level Up.</h2>
+            <span className="section-label">{t("Gamification")}</span>
+            <h2 className="section-title">{t("Learn. Earn. Level Up.")}</h2>
             <div className="divider" />
             <p
               style={{
@@ -396,46 +411,52 @@ export default function Home() {
                 marginBottom: 24,
               }}
             >
-              AgriTech makes farming engaging through a powerful rewards system
-              — because motivated farmers grow better crops.
+              {t(
+                "AgriTech makes farming engaging through a powerful rewards system — because motivated farmers grow better crops.",
+              )}
             </p>
             <div className="game-features">
               <div className="game-item">
                 <span>🏅</span>
                 <div>
-                  <strong>Badges & Achievements</strong>
+                  <strong>{t("Badges & Achievements")}</strong>
                   <p>
-                    Earn badges for quality checks, auctions, quizzes & more —
-                    displayed in your Hall of Fame.
+                    {t(
+                      "Earn badges for quality checks, auctions, quizzes & more — displayed in your Hall of Fame.",
+                    )}
                   </p>
                 </div>
               </div>
               <div className="game-item">
                 <span>📊</span>
                 <div>
-                  <strong>Bronze → Silver → Gold</strong>
+                  <strong>{t("Bronze → Silver → Gold")}</strong>
                   <p>
-                    Accumulate points across activities to level up your farmer
-                    league status.
+                    {t(
+                      "Accumulate points across activities to level up your farmer league status.",
+                    )}
                   </p>
                 </div>
               </div>
               <div className="game-item">
                 <span>🏆</span>
                 <div>
-                  <strong>District Leaderboard</strong>
+                  <strong>{t("District Leaderboard")}</strong>
                   <p>
-                    Compete with farmers in your district and climb the ranks.
+                    {t(
+                      "Compete with farmers in your district and climb the ranks.",
+                    )}
                   </p>
                 </div>
               </div>
               <div className="game-item">
                 <span>📚</span>
                 <div>
-                  <strong>Knowledge Quizzes</strong>
+                  <strong>{t("Knowledge Quizzes")}</strong>
                   <p>
-                    Multilingual quizzes unlock sequentially — earn 50 pts per
-                    completed quiz.
+                    {t(
+                      "Multilingual quizzes unlock sequentially — earn 50 pts per completed quiz.",
+                    )}
                   </p>
                 </div>
               </div>
@@ -444,33 +465,33 @@ export default function Home() {
           <div className="reveal gamification-visual">
             <div className="points-card">
               <div className="points-header">
-                <span>🏆 Leaderboard · Varanasi</span>
+                <span>🏆 {t("Leaderboard · Varanasi")}</span>
               </div>
               <div className="leaderboard-row rank-1">
-                <span className="rank">#1</span>
-                <span className="farmer-name">Ram Prasad</span>
-                <span className="pts">250 pts</span>
-                <span className="league bronze">Bronze</span>
+                <span className="rank">{t("#1")}</span>
+                <span className="farmer-name">{t("Ram Prasad")}</span>
+                <span className="pts">{t("250 pts")}</span>
+                <span className="league bronze">{t("Bronze")}</span>
               </div>
               <div className="leaderboard-row">
-                <span className="rank">#2</span>
-                <span className="farmer-name">Suresh Kumar</span>
-                <span className="pts">115 pts</span>
-                <span className="league bronze">Bronze</span>
+                <span className="rank">{t("#2")}</span>
+                <span className="farmer-name">{t("Suresh Kumar")}</span>
+                <span className="pts">{t("115 pts")}</span>
+                <span className="league bronze">{t("Bronze")}</span>
               </div>
               <div className="leaderboard-row">
-                <span className="rank">#3</span>
-                <span className="farmer-name">Mohan Singh</span>
-                <span className="pts">80 pts</span>
-                <span className="league bronze">Bronze</span>
+                <span className="rank">{t("#3")}</span>
+                <span className="farmer-name">{t("Mohan Singh")}</span>
+                <span className="pts">{t("80 pts")}</span>
+                <span className="league bronze">{t("Bronze")}</span>
               </div>
             </div>
             <div className="badges-row">
               {[
-                "🏅 Knowledge Champion",
-                "⭐ Quality Pioneer",
-                "🔨 Auction Pro",
-                "🌱 Soil Scientist",
+                "🏅 " + t("Knowledge Champion"),
+                "⭐ " + t("Quality Pioneer"),
+                "🔨 " + t("Auction Pro"),
+                "🌱 " + t("Soil Scientist"),
               ].map((b) => (
                 <span key={b} className="badge-tag">
                   {b}
@@ -485,24 +506,25 @@ export default function Home() {
       <section className="cta-section">
         <div className="cta-inner">
           <h2>
-            Ready to Transform
+            {t("Ready to Transform")}
             <br />
-            <em>Indian Agriculture?</em>
+            <em>{t("Indian Agriculture?")}</em>
           </h2>
           <p>
-            Join millions of farmers, buyers, and vendors on AgriTech — India's
-            most complete agri platform.
+            {t(
+              "Join millions of farmers, buyers, and vendors on AgriTech — India's most complete agri platform.",
+            )}
           </p>
           <div className="hero-actions" style={{ justifyContent: "center" }}>
             <Link to="/how-it-works" className="btn btn-ghost">
-              See How It Works
+              {t("See How It Works")}
             </Link>
             <Link
               to="/about"
               className="btn"
               style={{ background: "var(--white)", color: "var(--teal)" }}
             >
-              Learn More
+              {t("Learn More")}
             </Link>
           </div>
         </div>
