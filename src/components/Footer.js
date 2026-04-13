@@ -39,7 +39,6 @@ export default function Footer() {
           <span>© 2026 AgriTech. All rights reserved.</span>
           <div className="footer-badges">
             <span className="badge-pill">Govt. Integrated</span>
-            <span className="badge-pill">AGMARK Certified</span>
           </div>
         </div>
       </div>

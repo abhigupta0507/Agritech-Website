@@ -18,7 +18,7 @@ const sections = [
 - Field locations (GPS coordinates for weather forecasting)
 - Crop types, planting dates, harvest data, and storage information
 - Soil data from IoT sensors (moisture, pH, electrical conductivity)
-- Harvest quality parameters and AGMARK grading data
+- Harvest quality parameters and quality grading data
 
 **Transaction Data:**
 - Marketplace listings, bids, auction history
@@ -73,7 +73,7 @@ const sections = [
 - Government officials can view farmer harvest details when assigned a quality grading inspection.
 
 **Government & Regulatory Bodies:**
-- Quality grading data and AGMARK certificate information may be shared with relevant government agriculture departments.
+- Quality grading data may be shared with relevant government agriculture departments.
 - MSP procurement records are shared with the procuring government entity.
 
 **What We Do NOT Share:**
@@ -93,14 +93,12 @@ const sections = [
 **Security Measures:**
 - OTP-based authentication — no passwords stored.
 - Documents are stored with access controls limiting visibility to admins only.
-- All API communications use HTTPS encryption.
 - QR codes on certificates encode unique certificate IDs, not personal data.
 
 **Data Retention:**
 - Your account data is retained as long as your account is active.
 - Transaction records are retained for 7 years for regulatory compliance.
-- Quality grading inspection logs are retained permanently as part of certification records.
-- You may request deletion of your account and associated data by contacting us.`
+- Quality grading inspection logs are retained permanently as part of certification records.`
   },
   {
     id: 'rights',
@@ -111,37 +109,34 @@ const sections = [
 
 **Correction:** You can update your profile information at any time through the app settings.
 
-**Deletion:** You can request deletion of your account by contacting our support team at support@agritech.in. Note that transaction records and issued certificates may be retained for legal and regulatory compliance.
-
 **Data Portability:** You can request a copy of your personal data in a standard format by contacting us.
 
-**Grievance Redressal:** If you believe your data has been misused, contact our Grievance Officer at grievance@agritech.in within 30 days.
 
 **Children's Privacy:** AgriTech is not intended for users under 18. We do not knowingly collect data from minors.`
   },
-  {
-    id: 'iot',
-    title: '6. IoT & Sensor Data',
-    content: `AgriTech integrates with IoT devices deployed on your farm fields.
+//   {
+//     id: 'iot',
+//     title: '6. IoT & Sensor Data',
+//     content: `AgriTech integrates with IoT devices deployed on your farm fields.
 
-**What Sensors Collect:**
-- Soil moisture percentage
-- Soil temperature (°C)
-- Soil pH levels
-- Electrical conductivity (EC in dS/m)
-- Weather station readings (temperature, humidity, rainfall, wind speed)
-- Drone-captured field imagery
+// **What Sensors Collect:**
+// - Soil moisture percentage
+// - Soil temperature (°C)
+// - Soil pH levels
+// - Electrical conductivity (EC in dS/m)
+// - Weather station readings (temperature, humidity, rainfall, wind speed)
+// - Drone-captured field imagery
 
-**How It's Used:**
-- Sensor data is uploaded to cloud storage by the device and fetched by the app to display on your IoT dashboard.
-- Soil data is used by our Expense Prediction feature to estimate pesticide requirements.
-- Field imagery from drones is processed to provide crop health insights.
+// **How It's Used:**
+// - Sensor data is uploaded to cloud storage by the device and fetched by the app to display on your IoT dashboard.
+// - Soil data is used by our Expense Prediction feature to estimate pesticide requirements.
+// - Field imagery from drones is processed to provide crop health insights.
 
-**Device Management:**
-- Devices are listed in your IoT dashboard with battery status and alert flags.
-- IoT data collection is subject to modification based on hardware availability and deployment constraints.
-- You control which sensors are registered to your account.`
-  },
+// **Device Management:**
+// - Devices are listed in your IoT dashboard with battery status and alert flags.
+// - IoT data collection is subject to modification based on hardware availability and deployment constraints.
+// - You control which sensors are registered to your account.`
+//   },
   {
     id: 'changes',
     title: '7. Changes to This Policy',
@@ -155,9 +150,7 @@ const sections = [
 **Contact Us:**
 If you have questions about this Privacy Policy or how your data is handled, please contact:
 
-Email: privacy@agritech.in
-Grievance Officer: grievance@agritech.in
-Support: support@agritech.in | 1800-AGRI-HELP
+Email: fasalrath@agritechiitbhu.in
 
 **Last Updated:** April 2026
 **Applicable Law:** This policy is governed by the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023 (India).`
@@ -195,13 +188,12 @@ export default function PrivacyPolicy() {
   return (
     <div className="page privacy-page">
       <div className="privacy-hero">
-        <span className="section-label">Legal</span>
+        {/* <span className="section-label">Legal</span> */}
         <h1>Privacy Policy</h1>
         <p>How AgriTech collects, uses, and protects your information.</p>
         <div className="privacy-meta">
           <span>📅 Last Updated: April 2026</span>
-          <span>🇮🇳 Governed by DPDPA 2023</span>
-          <span>🔐 Data stored on Firebase Cloud</span>
+          <span>🔐 Data stored on Firebase and AWS Cloud</span>
         </div>
       </div>
 
@@ -248,8 +240,8 @@ export default function PrivacyPolicy() {
             <h3>Questions About Your Privacy?</h3>
             <p>Our team is here to help. Reach out at any time.</p>
             <div className="contact-row">
-              <a href="mailto:privacy@agritech.in" className="btn btn-primary">📧 privacy@agritech.in</a>
-              <a href="mailto:grievance@agritech.in" className="btn btn-outline">⚠️ File a Grievance</a>
+              <a href="mailto:fasalrath@agritechiitbhu.in" className="btn btn-primary">📧 fasalrath@agritechiitbhu.in</a>
+              <a href="mailto:fasalrath@agritechiitbhu.in" className="btn btn-outline">⚠️ File a Grievance</a>
             </div>
           </div>
         </main>

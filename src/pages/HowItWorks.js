@@ -3,7 +3,7 @@ import './HowItWorks.css';
 
 const tradingMethods = [
   {
-    name: 'Spot Market',
+    name: 'Auction/Bidding',
     color: '#1a7a6e',
     tag: 'Post-Harvest',
     desc: 'Auction-based real-time bidding for harvested crops. The highest bidder wins.',
@@ -40,8 +40,6 @@ const scoringItems = [
   { action: 'Vendor Purchase', pts: '+30 pts', color: 'olive' },
   { action: 'Auction Completed', pts: '+150 pts', color: 'slate' },
   { action: 'Profile Completed', pts: '+75 pts', color: 'teal' },
-  { action: 'Badge Earned', pts: '+25 pts', color: 'rust' },
-  { action: 'Crop Listed', pts: '+20 pts', color: 'olive' },
 ];
 
 export default function HowItWorks() {
@@ -58,7 +56,6 @@ export default function HowItWorks() {
     <div className="page hiw-page">
       {/* Hero */}
       <div className="hiw-hero">
-        <span className="section-label">Platform Walkthrough</span>
         <h1>How <em>AgriTech</em> Works</h1>
         <p>From registration to revenue — a complete walkthrough of every feature in the platform.</p>
       </div>
