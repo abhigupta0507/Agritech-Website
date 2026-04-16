@@ -194,7 +194,7 @@ export default function QualityPage() {
               <div className="quality-card-header">
                 <div className="quality-card-title">
                   <span className="quality-crop-icon">
-                    {request.cropId?.icon || "🌱"}
+                    {"🌱"}
                   </span>
                   <div>
                     <div className="quality-crop-name">

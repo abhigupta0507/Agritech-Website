@@ -360,7 +360,7 @@ export default function HarvestPage() {
               <div className="harvest-card-header">
                 <div className="harvest-card-title">
                   <span className="harvest-crop-icon">
-                    {output.cropId?.icon || "🌱"}
+                    {"🌱"}
                   </span>
                   <div>
                     <div className="harvest-crop-name">
@@ -515,7 +515,7 @@ export default function HarvestPage() {
               <>
                 <div className="harvest-modal-crop-info">
                   <span className="harvest-modal-crop-icon">
-                    {selectedOutput.cropId?.icon || "🌱"}
+                    {"🌱"}
                   </span>
                   <div>
                     <div className="harvest-modal-crop-name">
