@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
-import { API_BASE_URL } from "../config";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
+import { API_BASE_URL } from "../../config";
 
 const QUICK_ACTIONS = [
   { label: "My Farm",         path: "/fasalrath/farm",        icon: "🌾", bg: "#e8f5f3", color: "#1a7a6e" },
@@ -224,7 +224,7 @@ export default function DashboardPage() {
       {/* Bottom row: recent activity + profile incomplete prompt */}
       <div className="fr-grid-2">
         {/* Profile completion prompt */}
-        {farmer && !farmer.profileComplete && (
+        {farmer && !farmer.isProfileComplete && (
           <div className="fr-info-banner">
             <div style={{ fontSize: 24 }}>📋</div>
             <div>
@@ -242,7 +242,7 @@ export default function DashboardPage() {
         )}
 
         {/* Coming soon cards for features */}
-        <div className="fr-card">
+        {/* <div className="fr-card">
           <div className="fr-card-header">
             <span className="fr-card-title">📰 {t("Market Updates")}</span>
           </div>
@@ -276,9 +276,9 @@ export default function DashboardPage() {
               {t("View all MSP rates")} →
             </Link>
           </div>
-        </div>
+        </div> */}
 
-        <div className="fr-card">
+        {/* <div className="fr-card">
           <div className="fr-card-header">
             <span className="fr-card-title">📅 {t("Recent Activity")}</span>
           </div>
@@ -309,7 +309,7 @@ export default function DashboardPage() {
               {t("View all transactions")} →
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

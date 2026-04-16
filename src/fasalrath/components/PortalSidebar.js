@@ -30,7 +30,6 @@ const NAV_SECTIONS = [
   {
     title: "Finance",
     items: [
-      { key: "wallet",  label: "Wallet & Txns",    path: "/fasalrath/wallet",       icon: "💰" },
       { key: "msp",     label: "View MSP Rates",   path: "/fasalrath/msp",          icon: "📊" },
     ],
   },
@@ -39,7 +38,7 @@ const NAV_SECTIONS = [
     items: [
       { key: "weather",  label: "Weather & Alerts", path: "/fasalrath/weather",   icon: "⛅" },
       { key: "quizzes",  label: "Quizzes",          path: "/fasalrath/quizzes",   icon: "📚" },
-      { key: "devices",  label: "IoT Devices",      path: "/fasalrath/iot",       icon: "📡" },
+      // { key: "devices",  label: "IoT Devices",      path: "/fasalrath/iot",       icon: "📡" },
     ],
   },
 ];

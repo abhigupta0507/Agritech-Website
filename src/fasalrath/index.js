@@ -7,9 +7,9 @@ import PortalLayout from "./components/PortalLayout";
 
 import LoginPage    from "./pages/LoginPage";
 import OtpPage      from "./pages/OtpPage";
-import RegisterPage from "./pages/RegisterPage";
-import DashboardPage from "./pages/DashboardPage";
-import ProfilePage  from "./pages/ProfilePage";
+import RegisterPage from "./pages/Farmer/RegisterPage";
+import DashboardPage from "./pages/Farmer/DashboardPage";
+import ProfilePage  from "./pages/Farmer/ProfilePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 
 import "./styles/portal.css";

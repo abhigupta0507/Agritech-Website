@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
-import { API_BASE_URL } from "../config";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
+import { API_BASE_URL } from "../../config";
 
 export default function ProfilePage() {
   const { t } = useTranslation();
@@ -146,9 +146,6 @@ export default function ProfilePage() {
             <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
               <span className="fr-badge fr-badge-teal">
                 🏅 {t(farmer?.level || "Bronze")}
-              </span>
-              <span className="fr-badge fr-badge-slate">
-                ⭐ {farmer?.totalPoints || 0} {t("pts")}
               </span>
             </div>
 
@@ -316,9 +313,9 @@ export default function ProfilePage() {
       <div className="fr-card" style={{ marginTop: 20 }}>
         <div className="fr-card-header">
           <span className="fr-card-title">🏆 {t("My Achievements")}</span>
-          <a href="/fasalrath/quizzes" style={{ fontSize: 13, color: "var(--fr-teal)", textDecoration: "none", fontWeight: 600 }}>
+          {/* <a href="/fasalrath/quizzes" style={{ fontSize: 13, color: "var(--fr-teal)", textDecoration: "none", fontWeight: 600 }}>
             {t("View quizzes")} →
-          </a>
+          </a> */}
         </div>
         <div className="fr-card-body">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
@@ -361,7 +358,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Danger zone - Account actions */}
+      {/* Danger zone - Account actions
       <div className="fr-card" style={{ marginTop: 20, borderColor: "#fecaca" }}>
         <div className="fr-card-header" style={{ borderColor: "#fecaca" }}>
           <span className="fr-card-title" style={{ color: "var(--fr-error)" }}>
@@ -369,7 +366,7 @@ export default function ProfilePage() {
           </span>
         </div>
         <div className="fr-card-body" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <button
+          {/* <button
             className="fr-btn fr-btn-ghost fr-btn-sm"
             style={{ color: "var(--fr-error)", borderColor: "#fecaca" }}
             onClick={() => {
@@ -379,7 +376,7 @@ export default function ProfilePage() {
             }}
           >
             🚪 {t("Logout from all devices")}
-          </button>
+          </button> 
           <button
             className="fr-btn fr-btn-ghost fr-btn-sm"
             style={{ color: "var(--fr-error)", borderColor: "#fecaca" }}
@@ -392,7 +389,7 @@ export default function ProfilePage() {
             📥 {t("Download my data")}
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
