@@ -1,1 +1,1 @@
-//export const API_BASE_URL = "https://agritech-backend-1-ujzg.onrender.com";
+export const API_BASE_URL = "https://agritech-backend-1-ujzg.onrender.com";
