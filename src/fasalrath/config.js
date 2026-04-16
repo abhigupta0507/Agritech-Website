@@ -1,1 +1,1 @@
-export const API_BASE_URL="http://172.20.10.56:5000"
+export const API_BASE_URL="https://agritech-backend-1-ujzg.onrender.com"
