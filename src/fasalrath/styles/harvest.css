@@ -1,0 +1,541 @@
+/* Harvest Page Styles */
+
+.harvest-page-container {
+  padding-bottom: 40px;
+}
+
+.harvest-page-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.harvest-filter-bar {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px;
+  background: var(--fr-white);
+  border-bottom: 1px solid var(--fr-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.harvest-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.harvest-filter-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  background: var(--fr-off);
+  color: var(--fr-text-mid);
+  font-family: var(--fr-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.harvest-filter-btn:hover {
+  background: var(--fr-teal-pale);
+  color: var(--fr-teal-dark);
+}
+
+.harvest-filter-btn.active {
+  background: var(--fr-teal-light);
+  color: white;
+}
+
+.harvest-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 20px;
+}
+
+.harvest-stat-card {
+  background: var(--fr-white);
+  border: 1px solid var(--fr-border);
+  border-radius: var(--fr-radius);
+  padding: 16px;
+  text-align: center;
+}
+
+.harvest-stat-value {
+  font-family: var(--fr-font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--fr-slate);
+  margin-bottom: 6px;
+}
+
+.harvest-stat-label {
+  font-size: 13px;
+  color: var(--fr-text-light);
+}
+
+.harvest-empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.harvest-empty-state p {
+  font-size: 16px;
+  color: var(--fr-text-mid);
+  margin-top: 16px;
+}
+
+.harvest-empty-subtext {
+  font-size: 14px;
+  color: var(--fr-text-light);
+  margin-top: 8px;
+}
+
+.harvest-outputs-grid {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.harvest-output-card {
+  background: var(--fr-white);
+  border: 1px solid var(--fr-border);
+  border-radius: var(--fr-radius-lg);
+  padding: 16px;
+  transition: all 0.2s;
+}
+
+.harvest-output-card:hover {
+  box-shadow: var(--fr-shadow);
+  transform: translateY(-2px);
+}
+
+.harvest-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.harvest-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.harvest-crop-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.harvest-crop-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fr-slate);
+  margin-bottom: 2px;
+}
+
+.harvest-field-name {
+  font-size: 13px;
+  color: var(--fr-text-light);
+}
+
+.harvest-status-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.harvest-status-badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+
+.harvest-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.harvest-detail-row {
+  font-size: 14px;
+  color: var(--fr-text-mid);
+}
+
+.harvest-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--fr-border);
+}
+
+.harvest-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--fr-radius-sm);
+  border: none;
+  font-family: var(--fr-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.harvest-action-primary {
+  background: var(--fr-teal-light);
+  color: white;
+}
+
+.harvest-action-primary:hover {
+  background: var(--fr-teal-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--fr-shadow-sm);
+}
+
+.harvest-action-success {
+  background: #4CAF50;
+  color: white;
+}
+
+.harvest-action-success:hover {
+  background: #388E3C;
+  transform: translateY(-1px);
+  box-shadow: var(--fr-shadow-sm);
+}
+
+.harvest-action-secondary {
+  background: var(--fr-teal-pale);
+  color: var(--fr-teal-dark);
+  border: 1px solid rgba(42, 157, 143, 0.3);
+}
+
+.harvest-action-secondary:hover {
+  background: var(--fr-teal-light);
+  color: white;
+  border-color: var(--fr-teal-light);
+}
+
+.harvest-action-msp {
+  background: #FFF0EB;
+  color: #E76F51;
+  border: 1px solid rgba(231, 111, 81, 0.3);
+}
+
+.harvest-action-msp:hover {
+  background: #E76F51;
+  color: white;
+  border-color: #E76F51;
+}
+
+.harvest-sale-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.harvest-pending-info,
+.harvest-rejected-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--fr-radius-sm);
+  font-size: 14px;
+}
+
+.harvest-pending-info {
+  background: #FFF8F0;
+  color: #F4A261;
+}
+
+.harvest-rejected-info {
+  background: #FFF0F0;
+  color: #E76F51;
+}
+
+.harvest-pending-info span:first-child,
+.harvest-rejected-info span:first-child {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.harvest-track-link,
+.harvest-details-link {
+  background: none;
+  border: none;
+  color: inherit;
+  text-decoration: underline;
+  font-family: var(--fr-font-body);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.harvest-listed-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: #F0F8FF;
+  border-radius: var(--fr-radius-sm);
+  border: 1px solid #E1F5FE;
+}
+
+.harvest-listed-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #457B9D;
+  font-weight: 600;
+}
+
+.harvest-view-listing {
+  background: white;
+  border: 1px solid rgba(69, 123, 157, 0.2);
+  color: #457B9D;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-family: var(--fr-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.harvest-view-listing:hover {
+  background: #457B9D;
+  color: white;
+  border-color: #457B9D;
+}
+
+/* Modal Styles */
+.harvest-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.harvest-modal-content {
+  background: var(--fr-white);
+  border-radius: var(--fr-radius-lg);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--fr-shadow-lg);
+}
+
+.harvest-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--fr-border);
+}
+
+.harvest-modal-header h3 {
+  font-family: var(--fr-font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fr-slate);
+  margin: 0;
+}
+
+.harvest-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--fr-text-light);
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.harvest-modal-close:hover {
+  color: var(--fr-text);
+}
+
+.harvest-modal-crop-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--fr-off);
+  padding: 16px;
+  border-radius: var(--fr-radius);
+  margin: 20px;
+  margin-bottom: 0;
+}
+
+.harvest-modal-crop-icon {
+  font-size: 32px;
+}
+
+.harvest-modal-crop-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fr-slate);
+  margin-bottom: 4px;
+}
+
+.harvest-modal-crop-quantity {
+  font-size: 14px;
+  color: var(--fr-text-light);
+}
+
+.harvest-price-input-container {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--fr-border);
+  border-radius: var(--fr-radius-sm);
+  padding: 0 16px;
+  background: var(--fr-off);
+  transition: all 0.2s;
+}
+
+.harvest-price-input-container:focus-within {
+  border-color: var(--fr-teal-light);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.12);
+}
+
+.harvest-currency {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fr-slate);
+  margin-right: 8px;
+}
+
+.harvest-price-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  font-family: var(--fr-font-body);
+  font-size: 18px;
+  color: var(--fr-slate);
+  background: transparent;
+}
+
+.harvest-unit {
+  font-size: 14px;
+  color: var(--fr-text-light);
+  margin-left: 8px;
+}
+
+.harvest-loading-msp {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.harvest-msp-info-card {
+  background: var(--fr-off);
+  padding: 20px;
+  border-radius: var(--fr-radius);
+  margin: 20px;
+  margin-bottom: 16px;
+}
+
+.harvest-msp-label {
+  font-size: 14px;
+  color: var(--fr-text-light);
+  margin-bottom: 4px;
+}
+
+.harvest-msp-price {
+  font-family: var(--fr-font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: #E76F51;
+  margin-bottom: 16px;
+}
+
+.harvest-msp-divider {
+  height: 1px;
+  background: var(--fr-border);
+  margin-bottom: 16px;
+}
+
+.harvest-msp-total {
+  font-family: var(--fr-font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--fr-slate);
+}
+
+.harvest-msp-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #FFF0EB;
+  padding: 12px;
+  border-radius: var(--fr-radius-sm);
+  margin: 0 20px 20px;
+  font-size: 12px;
+  color: #E76F51;
+  line-height: 1.5;
+}
+
+.harvest-msp-note span:first-child {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.harvest-no-msp {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.harvest-no-msp p {
+  font-size: 16px;
+  color: var(--fr-text-light);
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .harvest-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .harvest-sale-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .harvest-card-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .harvest-status-badges {
+    align-items: flex-start;
+    width: 100%;
+  }
+}
