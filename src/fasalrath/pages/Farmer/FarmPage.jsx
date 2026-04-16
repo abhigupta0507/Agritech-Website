@@ -335,7 +335,7 @@ export default function FarmPage() {
                   {field.cropId ? (
                     <div className="farm-crop-section">
                       <div className="farm-crop-icon">
-                        {field.cropId.icon || "🌱"}
+                        {"🌱"}
                       </div>
                       <div className="farm-crop-info">
                         <div className="farm-crop-label">
@@ -549,7 +549,7 @@ export default function FarmPage() {
                     onClick={() => setSelectedCropId(crop._id)}
                   >
                     <span className="farm-crop-option-icon">
-                      {crop.icon || "🌱"}
+                      {"🌱"}
                     </span>
                     <div className="farm-crop-option-info">
                       <div className="farm-crop-option-name">
