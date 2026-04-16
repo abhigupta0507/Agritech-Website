@@ -7,18 +7,31 @@ import Home from './pages/Home';
 import HowItWorks from './pages/HowItWorks';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import AboutUs from './pages/AboutUs';
-
+import FasalRathPortal from "./fasalrath";
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/about" element={<AboutUs />} />
+        {/* ── FasalRath portal — NO Navbar/Footer ── */}
+        <Route path="/fasalrath/*" element={<FasalRathPortal />} />
+
+        {/* ── Existing public pages WITH Navbar/Footer ── */}
+        <Route
+          path="/*"
+          element={
+            <>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/about" element={<AboutUs />} />
+              </Routes>
+              <Footer />
+            </>
+          }
+        />
       </Routes>
-      <Footer />
     </Router>
   );
 }
