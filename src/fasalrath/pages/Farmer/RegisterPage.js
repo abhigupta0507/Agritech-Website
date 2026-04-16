@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
-import { API_BASE_URL } from "../config";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
+import { API_BASE_URL } from "../../config";
 
 export default function RegisterPage() {
   const { t } = useTranslation();
