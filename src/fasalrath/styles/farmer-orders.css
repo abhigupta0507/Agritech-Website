@@ -1,0 +1,151 @@
+.fo-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.fo-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 12px;
+}
+
+.fo-loading p {
+  color: var(--fr-text-light);
+  font-size: 15px;
+}
+
+.fo-empty {
+  background: var(--fr-off);
+  border-radius: 12px;
+  padding: 60px 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.fo-empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.fo-empty-text {
+  font-size: 16px;
+  color: var(--fr-text-light);
+}
+
+.fo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.fo-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--fr-border);
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.fo-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.fo-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--fr-border);
+}
+
+.fo-icon {
+  font-size: 28px;
+}
+
+.fo-product-info {
+  flex: 1;
+}
+
+.fo-product-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--fr-slate);
+  margin-bottom: 4px;
+}
+
+.fo-vendor-name {
+  font-size: 13px;
+  color: var(--fr-text-light);
+}
+
+.fo-status-badge {
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.fo-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fo-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.fo-detail-label {
+  font-size: 14px;
+  color: var(--fr-text-light);
+}
+
+.fo-detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fr-slate);
+}
+
+.fo-detail-value.amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fr-rust);
+}
+
+.fo-detail-value.period {
+  font-size: 13px;
+}
+
+.fo-card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--fr-off);
+  background: var(--fr-off);
+}
+
+.fo-order-date {
+  font-size: 12px;
+  color: var(--fr-text-light);
+}
+
+@media (max-width: 768px) {
+  .fo-card-header {
+    flex-wrap: wrap;
+  }
+
+  .fo-status-badge {
+    width: 100%;
+    text-align: center;
+  }
+}
