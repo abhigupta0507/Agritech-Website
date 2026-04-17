@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../../config";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import "../../styles/farm.css";
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyAm1FRdu2r1xGVlO7uB0RZkO0APWBDDS3w"; // Replace with your key
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API; // Replace with your key
 
 export default function FarmPage() {
   const { t } = useTranslation();
