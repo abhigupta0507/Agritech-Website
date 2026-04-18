@@ -34,7 +34,9 @@ export function BuyerAuthProvider({ children }) {
       if (stored && token) {
         setBuyer(JSON.parse(stored));
         setAccessToken(token);
+        //console.log(token);
       }
+      //console.log("NO TOKEN",token);
     } catch {
       clearSession();
     } finally {
@@ -118,13 +120,19 @@ export function BuyerAuthProvider({ children }) {
   };
 
   const verifyOtp = async (phone, otp) => {
+    const cleanPhone = phone.startsWith("+91") ? phone.slice(3) : phone;
     const res = await fetch(`${API_BASE_URL}/api/buyer/auth/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: `+91${phone}`, otp }),
+      body: JSON.stringify({
+        phone: `+91${cleanPhone}`,
+        otp: otp,
+      }),
     });
     if (!res.ok) {
       const err = await res.json();
+      //console.log(err);
+      //console.log(phone,otp);
       throw new Error(err.message || "Invalid OTP");
     }
     const data = await res.json();

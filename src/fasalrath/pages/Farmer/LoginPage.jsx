@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -20,7 +20,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   
 
-  const from = location.state?.from?.pathname || "/fasalrath/dashboard";
+  const from = location.state?.from?.pathname || "/fasalrath/farmer/dashboard";
 
   // Already logged in → redirect
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function LoginPage() {
     setError("");
     try {
       await sendOtp(phone);
-      navigate("/fasalrath/otp", { state: { phone, from } });
+      navigate("/fasalrath/farmer/otp", { state: { phone, from } });
     } catch (err) {
       setError(err.message || t("Failed to send OTP. Please try again."));
     } finally {

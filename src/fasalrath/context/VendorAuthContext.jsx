@@ -118,10 +118,12 @@ export function VendorAuthProvider({ children }) {
   };
 
   const verifyOtp = async (phone, otp) => {
+    const cleanPhone = phone.startsWith("+91") ? phone.slice(3) : phone;
+
     const res = await fetch(`${API_BASE_URL}/api/vendor/auth/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: `+91${phone}`, otp }),
+      body: JSON.stringify({ phone: `+91${cleanPhone}`, otp }),
     });
     if (!res.ok) {
       const err = await res.json();

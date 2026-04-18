@@ -97,7 +97,7 @@ export function FarmerAuthProvider({ children }) {
 
   /* ── Send OTP ── */
   const sendOtp = async (phone) => {
-    console.log(API_BASE_URL);
+    //(API_BASE_URL);
     const res = await fetch(`${API_BASE_URL}/api/farmer-auth/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -374,7 +374,7 @@ export default function RegisterPage() {
             stateCodeMap.current = Object.fromEntries(
               data.states.map((s) => [s.state, s.stateCode]),
             );
-            console.log(states);
+            //console.log(states);
             setLoadingStates(false);
             return;
           }
@@ -512,7 +512,7 @@ export default function RegisterPage() {
 
       const data = await res.json();
       updateFarmerLocal({ ...data.farmer, profileComplete: true });
-      navigate("/fasalrath/dashboard", { replace: true });
+      navigate("/fasalrath/farmer/dashboard", { replace: true });
     } catch (err) {
       if (err.message === "SESSION_EXPIRED") {
         navigate("/fasalrath/login", { replace: true });
