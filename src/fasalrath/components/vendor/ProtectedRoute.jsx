@@ -1,4 +1,3 @@
-// src/fasalrath/components/vendor/ProtectedRoute.jsx
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useVendorAuth } from "../../context/VendorAuthContext";

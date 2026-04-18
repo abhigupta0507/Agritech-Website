@@ -1,48 +1,3 @@
-// import React from "react";
-// import { Routes, Route, Navigate } from "react-router-dom";
-
-// import { FarmerAuthProvider } from "./context/FarmerAuthContext";
-// import ProtectedRoute from "./components/ProtectedRoute";
-// import PortalTopbar from "./components/PortalTopbar";
-// import PortalLayout from "./components/PortalLayout";
-
-// import LoginPage from "./pages/LoginPage";
-// import OtpPage from "./pages/OtpPage";
-// import RegisterPage from "./pages/Farmer/RegisterPage";
-// import DashboardPage from "./pages/Farmer/DashboardPage";
-// import ProfilePage from "./pages/Farmer/ProfilePage";
-// import FarmPage from "./pages/Farmer/FarmPage";
-// import HarvestPage from "./pages/Farmer/HarvestPage";
-// import QualityPage from "./pages/Farmer/QualityPage";
-// import ComingSoonPage from "./pages/ComingSoonPage";
-// import QuizzesPage from "./pages/Farmer/QuizzesPage";
-// import AllActionsPage from "./pages/Farmer/AllActionsPage";
-// import ExpensePredictionPage from "./pages/Farmer/ExpensePredictionPage";
-// import FarmerOrdersPage from "./pages/Farmer/FarmerOrdersPage";
-// import FarmerTransactionHistoryPage from "./pages/Farmer/FarmerTransactionHistoryPage";
-// import MyOffersPage from "./pages/Farmer/MyOffersPage"; 
-// import VendorMarketplacePage from "./pages/Farmer/VendorMarketplacePage";
-// import ViewMspPage from "./pages/Farmer/ViewMspPage";
-
-// import "./styles/portal.css";
-
-// export default function FasalRathPortal() {
-//   return (
-//     <FarmerAuthProvider>
-//       <div className="fr-portal">
-//         <Routes>
-//           {/* Auth routes */}
-          
-
-//           {/* Default redirect */}
-//           <Route path="" element={<Navigate to="login" replace />} />
-//           <Route path="*" element={<Navigate to="login" replace />} />
-//         </Routes>
-//       </div>
-//     </FarmerAuthProvider>
-//   );
-// }
-// src/fasalrath/index.jsx
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
@@ -83,6 +38,11 @@ import VendorLoginPage from "./pages/vendor/LoginPage";
 import VendorOtpPage from "./pages/vendor/OtpPage";
 import VendorRegisterPage from "./pages/vendor/RegisterPage";
 import VendorProfilePage from "./pages/vendor/ProfilePage";
+import VendorDashboardPage from "./pages/vendor/DashboardPage";
+import VendorProductsPage from "./pages/vendor/ProductsPage";
+import VendorOrdersPage from "./pages/vendor/OrdersPage";
+import VendorAddEditProductPage from "./pages/vendor/AddEditProductPage";
+import VendorTransactionsPage from "./pages/vendor/TransactionsPage";
 
 // Buyer
 import BuyerProtectedRoute from "./components/buyer/ProtectedRoute";
@@ -101,10 +61,6 @@ import GovtLoginPage from "./pages/govt/LoginPage";
 import GovtOtpPage from "./pages/govt/OtpPage";
 import GovtCompleteProfilePage from "./pages/govt/CompleteProfilePage";
 import GovtVerificationPendingPage from "./pages/govt/VerificationPendingPage";
-// import GovtDashboardPage from "./pages/govt/DashboardPage";
-// import GovtQualityGradingPage from "./pages/govt/QualityGradingPage";
-// import GovtMspCompliancePage from "./pages/govt/MspCompliancePage";
-// import GovtProfilePage from "./pages/govt/ProfilePage";
 
 import "./styles/portal.css";
 
@@ -217,7 +173,6 @@ export default function FasalRathPortal() {
                     </FarmerProtectedRoute>
                   }
                 />
-
                 <Route
                   path="expense"
                   element={
@@ -249,16 +204,6 @@ export default function FasalRathPortal() {
                   }
                 />
                 <Route
-                  path="quality"
-                  element={
-                    <FarmerProtectedRoute>
-                      <FarmerPortalLayout>
-                        <QualityPage />
-                      </FarmerPortalLayout>
-                    </FarmerProtectedRoute>
-                  }
-                />
-                <Route
                   path="offers"
                   element={
                     <FarmerProtectedRoute>
@@ -273,13 +218,11 @@ export default function FasalRathPortal() {
                   element={
                     <FarmerProtectedRoute>
                       <FarmerPortalLayout>
-                        <ViewMspPage/>
+                        <ViewMspPage />
                       </FarmerPortalLayout>
                     </FarmerProtectedRoute>
                   }
                 />
-             
-
                 <Route path="*" element={<Navigate to="login" replace />} />
               </Routes>
             </FarmerAuthProvider>
@@ -320,11 +263,71 @@ export default function FasalRathPortal() {
                   }
                 />
                 <Route
+                  path="dashboard"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout>
+                        <VendorDashboardPage />
+                      </VendorPortalLayout>
+                    </VendorProtectedRoute>
+                  }
+                />
+                <Route
                   path="profile"
                   element={
                     <VendorProtectedRoute>
                       <VendorPortalLayout>
                         <VendorProfilePage />
+                      </VendorPortalLayout>
+                    </VendorProtectedRoute>
+                  }
+                />
+                <Route
+                  path="products"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout>
+                        <VendorProductsPage />
+                      </VendorPortalLayout>
+                    </VendorProtectedRoute>
+                  }
+                />
+                <Route
+                  path="orders"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout>
+                        <VendorOrdersPage />
+                      </VendorPortalLayout>
+                    </VendorProtectedRoute>
+                  }
+                />
+                <Route
+                  path="add-product"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout>
+                        <VendorAddEditProductPage />
+                      </VendorPortalLayout>
+                    </VendorProtectedRoute>
+                  }
+                />
+                <Route
+                  path="edit-product/:id"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout>
+                        <VendorAddEditProductPage />
+                      </VendorPortalLayout>
+                    </VendorProtectedRoute>
+                  }
+                />
+                <Route
+                  path="transactions"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout>
+                        <VendorTransactionsPage />
                       </VendorPortalLayout>
                     </VendorProtectedRoute>
                   }
@@ -390,14 +393,6 @@ export default function FasalRathPortal() {
           element={
             <GovtAuthProvider>
               <Routes>
-                {/* <Route path="login" element={<><GovtPortalTopbar /><GovtLoginPage /></>} />
-              <Route path="otp" element={<><GovtPortalTopbar /><GovtOtpPage /></>} />
-              <Route path="complete-profile" element={<GovtProtectedRoute><GovtPortalTopbar /><GovtCompleteProfilePage /></GovtProtectedRoute>} />
-              <Route path="verification-pending" element={<GovtProtectedRoute><GovtPortalTopbar /><GovtVerificationPendingPage /></GovtProtectedRoute>} />
-              <Route path="dashboard" element={<GovtProtectedRoute><GovtPortalLayout><GovtDashboardPage /></GovtPortalLayout></GovtProtectedRoute>} />
-              <Route path="quality-grading" element={<GovtProtectedRoute><GovtPortalLayout><GovtQualityGradingPage /></GovtPortalLayout></GovtProtectedRoute>} />
-              <Route path="msp-compliance" element={<GovtProtectedRoute><GovtPortalLayout><GovtMspCompliancePage /></GovtPortalLayout></GovtProtectedRoute>} />
-              <Route path="profile" element={<GovtProtectedRoute><GovtPortalLayout><GovtProfilePage /></GovtPortalLayout></GovtProtectedRoute>} /> */}
                 <Route path="*" element={<Navigate to="login" replace />} />
               </Routes>
             </GovtAuthProvider>
