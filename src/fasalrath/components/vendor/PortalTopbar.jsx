@@ -1,4 +1,3 @@
-// src/fasalrath/components/vendor/PortalTopbar.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -26,7 +25,7 @@ export default function VendorPortalTopbar() {
       <div className="fr-topbar-inner">
         <Link
           to={
-            isAuthenticated ? "/fasalrath/vendor/profile" : "/fasalrath/vendor"
+            isAuthenticated ? "/fasalrath/vendor/dashboard" : "/fasalrath/vendor"
           }
           className="fr-topbar-logo"
         >
@@ -145,6 +144,28 @@ export default function VendorPortalTopbar() {
                     }
                   >
                     <span>👤</span> {t("My Profile")}
+                  </Link>
+                  <Link
+                    to="/fasalrath/vendor/dashboard"
+                    onClick={() => setShowAccount(false)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 16px",
+                      textDecoration: "none",
+                      color: "#334155",
+                      fontSize: 14,
+                      transition: "background 0.1s",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.background = "#f1f5f9")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background = "transparent")
+                    }
+                  >
+                    <span>🏠</span> {t("Dashboard")}
                   </Link>
                   <div style={{ borderTop: "1px solid #e2e8f0" }}>
                     <button
