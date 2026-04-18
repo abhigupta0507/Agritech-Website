@@ -5,15 +5,15 @@ import { useFarmerAuth } from "../../context/FarmerAuthContext";
 import { API_BASE_URL } from "../../config";
 
 const QUICK_ACTIONS = [
-  { label: "My Farm",         path: "/fasalrath/farm",        icon: "🌾", bg: "#e8f5f3", color: "#1a7a6e" },
-  { label: "My Harvest",      path: "/fasalrath/harvest",     icon: "🌽", bg: "#fef7ee", color: "#c2681e" },
-  { label: "Marketplace",     path: "/fasalrath/marketplace", icon: "🛒", bg: "#fdf0ed", color: "#c04a38" },
-  { label: "Quality Certs",   path: "/fasalrath/quality",     icon: "📜", bg: "#f0fdf4", color: "#16a34a" },
-  { label: "My Offers",       path: "/fasalrath/offers",      icon: "🤝", bg: "#eff6ff", color: "#2563eb" },
-  { label: "View MSP Rates",  path: "/fasalrath/msp",         icon: "📊", bg: "#faf5ff", color: "#7c3aed" },
-  { label: "Expense Forecast",path: "/fasalrath/forecast",    icon: "💹", bg: "#fff7ed", color: "#ea580c" },
-  { label: "Weather Alerts",  path: "/fasalrath/weather",     icon: "⛅", bg: "#f0f9ff", color: "#0284c7" },
-  { label: "Knowledge Quiz",  path: "/fasalrath/quizzes",     icon: "📚", bg: "#fdf4ff", color: "#9333ea" },
+  { label: "My Farm",         path: "/fasalrath/farmer/farm",        icon: "🌾", bg: "#e8f5f3", color: "#1a7a6e" },
+  { label: "My Harvest",      path: "/fasalrath/farmer/harvest",     icon: "🌽", bg: "#fef7ee", color: "#c2681e" },
+  { label: "Marketplace",     path: "/fasalrath/farmer/marketplace", icon: "🛒", bg: "#fdf0ed", color: "#c04a38" },
+  { label: "Quality Certs",   path: "/fasalrath/farmer/quality",     icon: "📜", bg: "#f0fdf4", color: "#16a34a" },
+  { label: "My Offers",       path: "/fasalrath/farmer/offers",      icon: "🤝", bg: "#eff6ff", color: "#2563eb" },
+  { label: "View MSP Rates",  path: "/fasalrath/farmer/msp",         icon: "📊", bg: "#faf5ff", color: "#7c3aed" },
+  { label: "Expense Forecast",path: "/fasalrath/farmer/forecast",    icon: "💹", bg: "#fff7ed", color: "#ea580c" },
+  { label: "Weather Alerts",  path: "/fasalrath/farmer/weather",     icon: "⛅", bg: "#f0f9ff", color: "#0284c7" },
+  { label: "Knowledge Quiz",  path: "/fasalrath/farmer/quizzes",     icon: "📚", bg: "#fdf4ff", color: "#9333ea" },
 ];
 
 export default function DashboardPage() {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
 
 const LANGS = [
   { code: "en", label: "EN" },
@@ -10,14 +10,49 @@ const LANGS = [
 ];
 
 const NAV_ITEMS = [
-  { key: "home",       label: "My Dashboard",     path: "/fasalrath/dashboard",   icon: "🏠" },
-  { key: "farm",       label: "My Farm",           path: "/fasalrath/farm",        icon: "🌾" },
-  { key: "harvest",    label: "My Harvest",        path: "/fasalrath/harvest",     icon: "🌽" },
-  { key: "market",     label: "Marketplace",       path: "/fasalrath/marketplace", icon: "🛒" },
-  { key: "quality",    label: "Quality Certs",     path: "/fasalrath/quality",     icon: "📜" },
-  { key: "offers",     label: "My Offers",         path: "/fasalrath/offers",      icon: "🤝" },
-  { key: "orders",     label: "Orders",            path: "/fasalrath/orders",      icon: "📦" },
-  { key: "wallet",     label: "Wallet",            path: "/fasalrath/wallet",      icon: "💰" },
+  {
+    key: "home",
+    label: "My Dashboard",
+    path: "/fasalrath/farmer/dashboard",
+    icon: "🏠",
+  },
+  { key: "farm", label: "My Farm", path: "/fasalrath/farmer/farm", icon: "🌾" },
+  {
+    key: "harvest",
+    label: "My Harvest",
+    path: "/fasalrath/farmer/harvest",
+    icon: "🌽",
+  },
+  {
+    key: "market",
+    label: "Marketplace",
+    path: "/fasalrath/farmer/marketplace",
+    icon: "🛒",
+  },
+  {
+    key: "quality",
+    label: "Quality Certs",
+    path: "/fasalrath/farmer/quality",
+    icon: "📜",
+  },
+  {
+    key: "offers",
+    label: "My Offers",
+    path: "/fasalrath/farmer/offers",
+    icon: "🤝",
+  },
+  {
+    key: "orders",
+    label: "Orders",
+    path: "/fasalrath/farmer/orders",
+    icon: "📦",
+  },
+  {
+    key: "wallet",
+    label: "Wallet",
+    path: "/fasalrath/farmer/wallet",
+    icon: "💰",
+  },
 ];
 
 export default function PortalTopbar() {
@@ -29,14 +64,14 @@ export default function PortalTopbar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/fasalrath/login");
+    navigate("/");
   };
 
   return (
     <header className="fr-topbar">
       <div className="fr-topbar-inner">
         {/* Logo */}
-        <Link to={isAuthenticated ? "/fasalrath/dashboard" : "/fasalrath"} className="fr-topbar-logo">
+        <Link to={isAuthenticated ? "/fasalrath/farmer/dashboard" : "/fasalrath"} className="fr-topbar-logo">
           <div className="fr-topbar-logo-icon">🌾</div>
           <div className="fr-topbar-logo-text">
             <span className="fr-topbar-logo-name">FasalRath</span>
@@ -151,9 +186,9 @@ export default function PortalTopbar() {
                       </div>
                     </div>
                     {[
-                      { label: t("My Dashboard"), path: "/fasalrath/dashboard", icon: "🏠" },
-                      { label: t("My Profile"),   path: "/fasalrath/profile",   icon: "👤" },
-                      { label: t("My Farm"),      path: "/fasalrath/farm",      icon: "🌾" },
+                      { label: t("My Dashboard"), path: "/fasalrath/farmer/dashboard", icon: "🏠" },
+                      { label: t("My Profile"),   path: "/fasalrath/farmer/profile",   icon: "👤" },
+                      { label: t("My Farm"),      path: "/fasalrath/farmer/farm",      icon: "🌾" },
                     ].map(item => (
                       <Link
                         key={item.path}
@@ -191,7 +226,7 @@ export default function PortalTopbar() {
               </div>
             </>
           ) : (
-            <Link to="/fasalrath/login" className="fr-topbar-btn">
+            <Link to="/fasalrath/farmer/login" className="fr-topbar-btn">
               <span className="fr-topbar-btn-label">{t("Hello, sign in")}</span>
               <span className="fr-topbar-btn-value">{t("Account & Lists")} ▾</span>
             </Link>

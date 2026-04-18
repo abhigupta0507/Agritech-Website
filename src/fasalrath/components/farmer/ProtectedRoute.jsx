@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
 
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useFarmerAuth();

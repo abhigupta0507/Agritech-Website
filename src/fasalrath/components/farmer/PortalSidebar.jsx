@@ -1,43 +1,43 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFarmerAuth } from "../context/FarmerAuthContext";
+import { useFarmerAuth } from "../../context/FarmerAuthContext";
 
 const NAV_SECTIONS = [
   {
     title: "Overview",
     items: [
-      { key: "dashboard", label: "Dashboard",      path: "/fasalrath/dashboard",   icon: "🏠" },
-      { key: "profile",   label: "My Profile",     path: "/fasalrath/profile",     icon: "👤" },
+      { key: "dashboard", label: "Dashboard",      path: "/fasalrath/farmer/dashboard",   icon: "🏠" },
+      { key: "profile",   label: "My Profile",     path: "/fasalrath/farmer/profile",     icon: "👤" },
     ],
   },
   {
     title: "Farm",
     items: [
-      { key: "farm",    label: "My Farm & Fields", path: "/fasalrath/farm",     icon: "🌾" },
-      { key: "harvest", label: "My Harvest",       path: "/fasalrath/harvest",  icon: "🌽" },
-      { key: "quality", label: "Quality Certs",    path: "/fasalrath/quality",  icon: "📜" },
+      { key: "farm",    label: "My Farm & Fields", path: "/fasalrath/farmer/farm",     icon: "🌾" },
+      { key: "harvest", label: "My Harvest",       path: "/fasalrath/farmer/harvest",  icon: "🌽" },
+      { key: "quality", label: "Quality Certs",    path: "/fasalrath/farmer/quality",  icon: "📜" },
     ],
   },
   {
     title: "Market",
     items: [
-      { key: "market",  label: "Marketplace",      path: "/fasalrath/marketplace", icon: "🛒" },
-      { key: "offers",  label: "My Offers",        path: "/fasalrath/offers",      icon: "🤝" },
-      { key: "orders",  label: "Orders",           path: "/fasalrath/orders",      icon: "📦" },
+      { key: "market",  label: "Marketplace",      path: "/fasalrath/farmer/marketplace", icon: "🛒" },
+      { key: "offers",  label: "My Offers",        path: "/fasalrath/farmer/offers",      icon: "🤝" },
+      { key: "orders",  label: "Orders",           path: "/fasalrath/farmer/orders",      icon: "📦" },
     ],
   },
   {
     title: "Finance",
     items: [
-      { key: "msp",     label: "View MSP Rates",   path: "/fasalrath/msp",          icon: "📊" },
+      { key: "msp",     label: "View MSP Rates",   path: "/fasalrath/farmer/msp",          icon: "📊" },
     ],
   },
   {
     title: "More",
     items: [
-      { key: "weather",  label: "Weather & Alerts", path: "/fasalrath/weather",   icon: "⛅" },
-      { key: "quizzes",  label: "Quizzes",          path: "/fasalrath/quizzes",   icon: "📚" },
+      { key: "weather",  label: "Weather & Alerts", path: "/fasalrath/farmer/weather",   icon: "⛅" },
+      { key: "quizzes",  label: "Quizzes",          path: "/fasalrath/farmer/quizzes",   icon: "📚" },
       // { key: "devices",  label: "IoT Devices",      path: "/fasalrath/iot",       icon: "📡" },
     ],
   },
@@ -89,7 +89,7 @@ export default function PortalSidebar() {
         <div className="fr-sidebar-divider" />
         <button
           className="fr-sidebar-link"
-          onClick={() => { logout(); navigate("/fasalrath/login"); }}
+          onClick={() => { logout(); navigate("/fasalrath/farmer/login"); }}
           style={{ color: "#e76f51" }}
         >
           <span className="fr-sidebar-link-icon">🚪</span>
