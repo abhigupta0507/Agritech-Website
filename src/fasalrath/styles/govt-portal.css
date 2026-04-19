@@ -1,0 +1,306 @@
+/* src/fasalrath/styles/govt-portal.css */
+
+/* Spinner Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card Hover Effects */
+.govt-card-hover {
+  transition: all 0.2s ease;
+}
+
+.govt-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Hover Effects */
+.govt-button-hover {
+  transition: all 0.2s ease;
+}
+
+.govt-button-hover:hover {
+  transform: scale(1.05);
+}
+
+.govt-button-hover:active {
+  transform: scale(0.98);
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.govt-modal-backdrop {
+  animation: fadeIn 0.2s ease;
+}
+
+.govt-modal-content {
+  animation: slideUp 0.3s ease;
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+  .govt-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .govt-stats-container {
+    flex-direction: column;
+  }
+
+  .govt-param-row {
+    flex-direction: column;
+  }
+}
+
+/* Focus States */
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid #606C38;
+  outline-offset: 2px;
+}
+
+/* Disabled States */
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+input:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  background-color: #F0F0F0;
+  color: #999;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Loading States */
+.govt-loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Badge Styles */
+.govt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #FFF;
+}
+
+.govt-badge-success {
+  background-color: #2A9D8F;
+}
+
+.govt-badge-warning {
+  background-color: #F4A261;
+}
+
+.govt-badge-danger {
+  background-color: #E76F51;
+}
+
+.govt-badge-info {
+  background-color: #457B9D;
+}
+
+/* Card Styles */
+.govt-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.govt-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Form Styles */
+.govt-form-group {
+  margin-bottom: 20px;
+}
+
+.govt-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.govt-form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #E6E6E6;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #264653;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.govt-form-input:focus {
+  border-color: #606C38;
+  outline: none;
+}
+
+/* Utility Classes */
+.govt-text-center {
+  text-align: center;
+}
+
+.govt-text-right {
+  text-align: right;
+}
+
+.govt-text-left {
+  text-align: left;
+}
+
+.govt-mt-1 {
+  margin-top: 8px;
+}
+
+.govt-mt-2 {
+  margin-top: 16px;
+}
+
+.govt-mt-3 {
+  margin-top: 24px;
+}
+
+.govt-mb-1 {
+  margin-bottom: 8px;
+}
+
+.govt-mb-2 {
+  margin-bottom: 16px;
+}
+
+.govt-mb-3 {
+  margin-bottom: 24px;
+}
+
+.govt-p-1 {
+  padding: 8px;
+}
+
+.govt-p-2 {
+  padding: 16px;
+}
+
+.govt-p-3 {
+  padding: 24px;
+}
+
+/* Flex Utilities */
+.govt-flex {
+  display: flex;
+}
+
+.govt-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.govt-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.govt-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Color Utilities */
+.govt-text-primary {
+  color: #264653;
+}
+
+.govt-text-secondary {
+  color: #666;
+}
+
+.govt-text-success {
+  color: #2A9D8F;
+}
+
+.govt-text-warning {
+  color: #F4A261;
+}
+
+.govt-text-danger {
+  color: #E76F51;
+}
+
+.govt-bg-primary {
+  background-color: #606C38;
+}
+
+.govt-bg-light {
+  background-color: #F8F9FA;
+}
+
+.govt-bg-white {
+  background-color: #FFFFFF;
+}
