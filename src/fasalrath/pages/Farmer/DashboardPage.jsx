@@ -11,7 +11,6 @@ const QUICK_ACTIONS = [
   { label: "Quality Certs",   path: "/fasalrath/farmer/quality",     icon: "📜", bg: "#f0fdf4", color: "#16a34a" },
   { label: "My Offers",       path: "/fasalrath/farmer/offers",      icon: "🤝", bg: "#eff6ff", color: "#2563eb" },
   { label: "View MSP Rates",  path: "/fasalrath/farmer/msp",         icon: "📊", bg: "#faf5ff", color: "#7c3aed" },
-  { label: "Expense Forecast",path: "/fasalrath/farmer/forecast",    icon: "💹", bg: "#fff7ed", color: "#ea580c" },
   { label: "Weather Alerts",  path: "/fasalrath/farmer/weather",     icon: "⛅", bg: "#f0f9ff", color: "#0284c7" },
   { label: "Knowledge Quiz",  path: "/fasalrath/farmer/quizzes",     icon: "📚", bg: "#fdf4ff", color: "#9333ea" },
 ];

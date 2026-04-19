@@ -359,9 +359,7 @@ export default function HarvestPage() {
             <div key={output._id} className="harvest-output-card">
               <div className="harvest-card-header">
                 <div className="harvest-card-title">
-                  <span className="harvest-crop-icon">
-                    {"🌱"}
-                  </span>
+                  <span className="harvest-crop-icon">{"🌱"}</span>
                   <div>
                     <div className="harvest-crop-name">
                       {output.cropId?.cropName}
@@ -485,7 +483,12 @@ export default function HarvestPage() {
                       <span>✓</span>
                       <span>{t("Listed for sale")}</span>
                     </div>
-                    <button className="harvest-view-listing">
+                    <button
+                      className="harvest-view-listing"
+                      onClick={() =>
+                        navigate(`/fasalrath/farmer/listing-details/${output.saleId}`)
+                      }
+                    >
                       {t("View Details")} →
                     </button>
                   </div>
@@ -514,9 +517,7 @@ export default function HarvestPage() {
             {selectedOutput && (
               <>
                 <div className="harvest-modal-crop-info">
-                  <span className="harvest-modal-crop-icon">
-                    {"🌱"}
-                  </span>
+                  <span className="harvest-modal-crop-icon">{"🌱"}</span>
                   <div>
                     <div className="harvest-modal-crop-name">
                       {selectedOutput.cropId?.cropName}
