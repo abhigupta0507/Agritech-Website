@@ -33,6 +33,7 @@ import WeatherPage from "./pages/farmer/WeatherPage";
 import FarmerBiddingRoomPage from "./pages/farmer/FarmerBiddingRoomPage";
 import FarmerListingDetailsPage from "./pages/farmer/FarmerListingDetailsPage";
 
+
 // Vendor
 import VendorProtectedRoute from "./components/vendor/ProtectedRoute";
 import VendorPortalTopbar from "./components/vendor/PortalTopbar";
@@ -73,6 +74,12 @@ import GovtLoginPage from "./pages/govt/LoginPage";
 import GovtOtpPage from "./pages/govt/OtpPage";
 import GovtCompleteProfilePage from "./pages/govt/CompleteProfilePage";
 import GovtVerificationPendingPage from "./pages/govt/VerificationPendingPage";
+import GovtDashboardPage from "./pages/govt/DashboardPage";
+import GovtProfilePage from "./pages/govt/ProfilePage";
+import GovtQualityGradingPage from "./pages/govt/QualityGradingPage";
+import GovtMspCompliancePage from "./pages/govt/MspCompliancePage";
+import GovtAddMspPage from "./pages/govt/AddMspPage";
+import GovtEditMspPage from "./pages/govt/EditMspPage";
 
 import "./styles/portal.css";
 import BiddingRoomPage from "./pages/buyer/BiddingRoom";
@@ -261,7 +268,7 @@ export default function FasalRathPortal() {
                   element={
                     <FarmerProtectedRoute>
                       <FarmerPortalLayout>
-                        <FarmerBiddingRoomPage/>
+                        <FarmerBiddingRoomPage />
                       </FarmerPortalLayout>
                     </FarmerProtectedRoute>
                   }
@@ -530,11 +537,108 @@ export default function FasalRathPortal() {
         />
 
         {/* GOVT ROUTES */}
+       
         <Route
           path="govt/*"
           element={
-            <GovtAuthProvider>
+             <GovtAuthProvider>
               <Routes>
+                <Route
+                  path="login"
+                  element={
+                    <>
+                      <GovtPortalTopbar />
+                      <GovtLoginPage />
+                    </>
+                  }
+                />
+                <Route
+                  path="otp"
+                  element={
+                    <>
+                      <GovtPortalTopbar />
+                      <GovtOtpPage />
+                    </>
+                  }
+                />
+                <Route
+                  path="complete-profile"
+                  element={
+                    <>
+                      <GovtPortalTopbar />
+                      <GovtCompleteProfilePage />
+                    </>
+                  }
+                />
+                <Route
+                  path="verification-pending"
+                  element={
+                    <>
+                      <GovtPortalTopbar />
+                      <GovtVerificationPendingPage />
+                    </>
+                  }
+                />
+                <Route
+                  path="dashboard"
+                  element={
+                    <GovtProtectedRoute>
+                      <GovtPortalLayout>
+                        <GovtDashboardPage />
+                      </GovtPortalLayout>
+                    </GovtProtectedRoute>
+                  }
+                />
+                <Route
+                  path="profile"
+                  element={
+                    <GovtProtectedRoute>
+                      <GovtPortalLayout>
+                        <GovtProfilePage />
+                      </GovtPortalLayout>
+                    </GovtProtectedRoute>
+                  }
+                />
+                <Route
+                  path="quality-grading"
+                  element={
+                    <GovtProtectedRoute>
+                      <GovtPortalLayout>
+                        <GovtQualityGradingPage />
+                      </GovtPortalLayout>
+                    </GovtProtectedRoute>
+                  }
+                />
+                <Route
+                  path="msp-compliance"
+                  element={
+                    <GovtProtectedRoute>
+                      <GovtPortalLayout>
+                        <GovtMspCompliancePage />
+                      </GovtPortalLayout>
+                    </GovtProtectedRoute>
+                  }
+                />
+                <Route
+                  path="add-msp"
+                  element={
+                    <GovtProtectedRoute>
+                      <GovtPortalLayout>
+                        <GovtAddMspPage />
+                      </GovtPortalLayout>
+                    </GovtProtectedRoute>
+                  }
+                />
+                <Route
+                  path="edit-msp"
+                  element={
+                    <GovtProtectedRoute>
+                      <GovtPortalLayout>
+                        <GovtEditMspPage />
+                      </GovtPortalLayout>
+                    </GovtProtectedRoute>
+                  }
+                />
                 <Route path="*" element={<Navigate to="login" replace />} />
               </Routes>
             </GovtAuthProvider>
