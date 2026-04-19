@@ -8,17 +8,63 @@ export default function BuyerProfilePage() {
   const { t } = useTranslation();
   const { buyer, authFetch, updateBuyerLocal, logout } = useBuyerAuth();
 
-  const [editing, setEditing] = useState(false);
+  // --- UI States ---
+  const [modalVisible, setModalVisible] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+
+  // --- Data States ---
+  const [dashboardData, setDashboardData] = useState({
+    stats: { requirementsCount: 0, activeBids: 0, wonBids: 0 },
+    recentRequirements: [],
+  });
+
+  // --- Form States ---
   const [form, setForm] = useState({
     companyName: buyer?.companyName || "",
     contactPerson: buyer?.contactPerson || "",
     email: buyer?.email || "",
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [apiError, setApiError] = useState("");
 
+  // =========================
+  // INITIAL DATA FETCH
+  // =========================
+  useEffect(() => {
+    fetchFullProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchFullProfile = async () => {
+    try {
+      // NOTE: Ensure this matches your actual GET route in the backend router
+      const res = await authFetch(`${API_BASE_URL}/api/buyer/auth/profile`);
+      const data = await res.json();
+
+      if (res.ok) {
+        setDashboardData({
+          stats: data.stats || {
+            requirementsCount: 0,
+            activeBids: 0,
+            wonBids: 0,
+          },
+          recentRequirements: data.recentRequirements || [],
+        });
+
+        // Sync the latest buyer info from DB to our local context just in case
+        if (data.buyer) {
+          updateBuyerLocal(data.buyer);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load profile dashboard:", error);
+    } finally {
+      setLoadingProfile(false);
+    }
+  };
+
+  // Sync form when buyer context changes
   useEffect(() => {
     setForm({
       companyName: buyer?.companyName || "",
@@ -27,363 +73,595 @@ export default function BuyerProfilePage() {
     });
   }, [buyer]);
 
-  const set = (key) => (e) => {
-    setForm((f) => ({ ...f, [key]: e.target.value }));
-    setErrors((er) => ({ ...er, [key]: "" }));
+  // =========================
+  // UPDATE PROFILE HANDLERS
+  // =========================
+  const openEditModal = () => {
+    setForm({
+      companyName: buyer?.companyName || "",
+      contactPerson: buyer?.contactPerson || "",
+      email: buyer?.email || "",
+    });
+    setErrors({});
     setApiError("");
-    setSuccess(false);
+    setModalVisible(true);
   };
 
   const validate = () => {
-    const errs = {};
+    const newErrors = {};
     if (!form.companyName.trim())
-      errs.companyName = t("Company name is required");
+      newErrors.companyName = t("Organization name is required");
     if (!form.contactPerson.trim())
-      errs.contactPerson = t("Contact person is required");
-    if (form.email && form.email.trim()) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(form.email))
-        errs.email = t("Please enter a valid email address");
+      newErrors.contactPerson = t("Contact person name is required");
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!form.email.trim()) {
+      newErrors.email = t("Email is required");
+    } else if (!emailRegex.test(form.email.trim())) {
+      newErrors.email = t("Please enter a valid email");
     }
-    return errs;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSave = async () => {
-    const errs = validate();
-    if (Object.keys(errs).length) {
-      setErrors(errs);
-      return;
-    }
-    setLoading(true);
+  const handleUpdate = async () => {
+    if (!validate()) return;
+    setSaving(true);
     setApiError("");
-    setSuccess(false);
+
+    const payload = {
+      companyName: form.companyName.trim(),
+      contactPerson: form.contactPerson.trim(),
+      email: form.email.trim(),
+    };
+
     try {
       const res = await authFetch(
         `${API_BASE_URL}/api/buyer/auth/update-profile`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         },
       );
-      if (!res.ok) {
-        const e = await res.json();
-        throw new Error(e.message);
-      }
+
       const data = await res.json();
-      updateBuyerLocal({ ...data.buyer });
-      setSuccess(true);
-      setEditing(false);
-    } catch (e) {
-      setApiError(e.message || t("Failed to save changes"));
+
+      if (!res.ok)
+        throw new Error(data?.message || t("Failed to update profile"));
+
+      updateBuyerLocal({ ...buyer, ...payload, ...(data.buyer || {}) });
+      setModalVisible(false);
+    } catch (error) {
+      setApiError(error.message || t("Something went wrong"));
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
-  const handleCancel = () => {
-    setEditing(false);
-    setErrors({});
-    setApiError("");
-    setForm({
-      companyName: buyer?.companyName || "",
-      contactPerson: buyer?.contactPerson || "",
-      email: buyer?.email || "",
-    });
-  };
-
-  const initial = buyer?.companyName
-    ? buyer.companyName
-        .split(" ")
-        .map((w) => w[0])
-        .slice(0, 2)
-        .join("")
-        .toUpperCase()
-    : "B";
+  // =========================
+  // UI RENDER
+  // =========================
+  if (loadingProfile) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#F8F9FA",
+        }}
+      >
+        <div
+          style={{
+            textAlign: "center",
+            color: "#2A9D8F",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+        >
+          <div className="fr-spinner" style={{ margin: "0 auto 16px" }} />
+          {t("Loading Profile...")}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="fr-fade-in">
-      <div className="fr-page-header">
-        <div className="fr-page-breadcrumb">
-          <span>{t("Profile")}</span>
-        </div>
-        <div className="fr-page-title">👤 {t("My Profile")}</div>
+    <div
+      style={{
+        backgroundColor: "#F8F9FA",
+        minHeight: "100vh",
+        fontFamily: "sans-serif",
+        paddingBottom: 40,
+      }}
+    >
+      {/* HEADER */}
+      <div
+        style={{
+          padding: "40px 20px 16px",
+          backgroundColor: "#FFF",
+          borderBottom: "1px solid #E0E0E0",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: 28,
+            fontWeight: "bold",
+            color: "#264653",
+            margin: 0,
+            maxWidth: 800,
+            marginInline: "auto",
+          }}
+        >
+          {t("Dashboard & Profile")}
+        </h1>
       </div>
 
-      {success && (
-        <div className="fr-alert fr-alert-success fr-gap-20">
-          <span>✅</span> {t("Profile updated successfully!")}
-        </div>
-      )}
-      {apiError && (
-        <div className="fr-alert fr-alert-error fr-gap-20">
-          <span>⚠</span> {apiError}
-        </div>
-      )}
+      <div style={{ maxWidth: 800, margin: "20px auto 0", padding: "0 20px" }}>
+        {/* STATS GRID */}
+        {/*  */}
 
-      <div className="fr-grid-2">
-        <div className="fr-card">
+        {/* MAIN PROFILE CARD */}
+        <div
+          style={{
+            backgroundColor: "#FFFFFF",
+            borderRadius: 16,
+            padding: 24,
+            marginBottom: 24,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+          }}
+        >
           <div
-            className="fr-card-body"
-            style={{ textAlign: "center", padding: 32 }}
+            style={{ display: "flex", alignItems: "center", marginBottom: 24 }}
           >
             <div
               style={{
-                width: 80,
-                height: 80,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, #E76F51, #C04A38)",
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                backgroundColor: "#FFF8F0",
                 display: "flex",
+                justifyContent: "center",
                 alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--fr-font-display)",
-                fontSize: 28,
-                fontWeight: 800,
-                color: "white",
-                margin: "0 auto 16px",
-                boxShadow: "0 4px 16px rgba(231,111,81,0.35)",
+                fontSize: 32,
+                boxShadow: "inset 0 2px 4px rgba(0,0,0,0.05)",
               }}
             >
-              {initial}
+              🏢
             </div>
-
-            <div
-              style={{
-                fontFamily: "var(--fr-font-display)",
-                fontSize: 20,
-                fontWeight: 700,
-                color: "var(--fr-slate)",
-                marginBottom: 4,
-              }}
-            >
-              {buyer?.companyName || t("Buyer")}
+            <div style={{ marginLeft: 20, flex: 1 }}>
+              <div
+                style={{ fontSize: 24, fontWeight: "bold", color: "#264653" }}
+              >
+                {buyer?.companyName || t("Buyer Company")}
+              </div>
+              <div
+                style={{
+                  fontSize: 16,
+                  color: "#666",
+                  marginTop: 4,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+                📧 {buyer?.email || t("N/A")}
+              </div>
             </div>
+          </div>
 
-            <div
-              style={{
-                fontFamily: "var(--fr-font-mono)",
-                fontSize: 14,
-                color: "var(--fr-text-light)",
-                marginBottom: 16,
-              }}
-            >
-              +91 {buyer?.phone?.replace("+91", "") || ""}
-            </div>
-
+          <div
+            style={{
+              backgroundColor: "#F8F9FA",
+              borderRadius: 12,
+              padding: 16,
+              marginBottom: 20,
+            }}
+          >
             <div
               style={{
                 display: "flex",
-                justifyContent: "center",
-                gap: 8,
-                flexWrap: "wrap",
+                justifyContent: "space-between",
+                marginBottom: 12,
               }}
             >
+              <span style={{ fontSize: 14, color: "#666" }}>
+                {t("Contact Person")}
+              </span>
               <span
-                className="fr-badge"
-                style={{ background: "#E76F51", color: "white" }}
+                style={{ fontSize: 15, fontWeight: "bold", color: "#264653" }}
               >
-                💼 {t("Buyer")}
+                {buyer?.contactPerson || "N/A"}
               </span>
             </div>
-
-            <div
-              style={{
-                marginTop: 20,
-                padding: "12px 16px",
-                background: "var(--fr-off)",
-                borderRadius: "var(--fr-radius)",
-                border: "1px solid var(--fr-border)",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 12,
-                  color: "var(--fr-text-light)",
-                  marginBottom: 4,
-                }}
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ fontSize: 14, color: "#666" }}>
+                {t("Phone Number")}
+              </span>
+              <span
+                style={{ fontSize: 15, fontWeight: "bold", color: "#2A9D8F" }}
               >
-                {t("Mobile Verified")}
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  fontWeight: 700,
-                  color: "var(--fr-teal-dark)",
-                }}
-              >
-                ✅ +91 {buyer?.phone?.replace("+91", "") || ""}
-              </div>
+                ✅ +91 {buyer?.phone?.replace("+91", "") || "N/A"}
+              </span>
             </div>
           </div>
+
+          <button
+            onClick={openEditModal}
+            style={{
+              width: "100%",
+              padding: 14,
+              background: "#FFF",
+              border: "2px solid #E76F51",
+              borderRadius: 12,
+              fontSize: 15,
+              fontWeight: "bold",
+              color: "#E76F51",
+              cursor: "pointer",
+              transition: "0.2s",
+            }}
+          >
+            ✏️ {t("Edit Company Details")}
+          </button>
         </div>
 
-        <div className="fr-card">
-          <div className="fr-card-header">
-            <span className="fr-card-title">{t("Company Details")}</span>
-            {!editing ? (
-              <button
-                onClick={() => setEditing(true)}
-                className="fr-btn fr-btn-ghost fr-btn-sm"
-              >
-                ✏️ {t("Edit")}
-              </button>
-            ) : (
-              <div style={{ display: "flex", gap: 8 }}>
-                <button
-                  onClick={handleCancel}
-                  className="fr-btn fr-btn-ghost fr-btn-sm"
-                  disabled={loading}
-                >
-                  {t("Cancel")}
-                </button>
-                <button
-                  onClick={handleSave}
-                  className="fr-btn fr-btn-teal fr-btn-sm"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <div
-                        className="fr-spinner"
-                        style={{ width: 14, height: 14 }}
-                      />{" "}
-                      {t("Saving...")}
-                    </>
-                  ) : (
-                    t("Save Changes")
-                  )}
-                </button>
-              </div>
-            )}
+        {/* RECENT REQUIREMENTS SECTION
+        <div
+          style={{
+            backgroundColor: "#FFFFFF",
+            borderRadius: 16,
+            padding: 24,
+            marginBottom: 24,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 16,
+            }}
+          >
+            <h2
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "#264653",
+                margin: 0,
+              }}
+            >
+              {t("Recent Requirements")}
+            </h2>
           </div>
 
-          <div className="fr-card-body">
-            {!editing ? (
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: 20 }}
-              >
-                {[
-                  {
-                    label: t("Company Name"),
-                    value: buyer?.companyName || "—",
-                    icon: "🏢",
-                  },
-                  {
-                    label: t("Contact Person"),
-                    value: buyer?.contactPerson || "—",
-                    icon: "👤",
-                  },
-                  {
-                    label: t("Mobile Number"),
-                    value: `+91 ${buyer?.phone?.replace("+91", "") || ""}`,
-                    icon: "📱",
-                    mono: true,
-                  },
-                  {
-                    label: t("Email"),
-                    value: buyer?.email || "—",
-                    icon: "📧",
-                    mono: true,
-                  },
-                ].map((field) => (
-                  <div key={field.label} className="fr-profile-field">
-                    <div className="fr-profile-label">{field.label}</div>
+          {dashboardData.recentRequirements.length === 0 ? (
+            <div
+              style={{
+                textAlign: "center",
+                padding: "30px 0",
+                backgroundColor: "#F8F9FA",
+                borderRadius: 12,
+              }}
+            >
+              <span style={{ fontSize: 40, opacity: 0.5 }}>🌱</span>
+              <p style={{ color: "#666", marginTop: 12, fontWeight: "500" }}>
+                {t("You haven't posted any requirements yet.")}
+              </p>
+            </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {dashboardData.recentRequirements.map((req) => (
+                <div
+                  key={req._id}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: 16,
+                    border: "1px solid #E0E0E0",
+                    borderRadius: 12,
+                    backgroundColor: "#FAFAFA",
+                  }}
+                >
+                  <div>
                     <div
-                      className={`fr-profile-value ${field.mono ? "mono" : ""}`}
-                      style={{ display: "flex", alignItems: "center", gap: 6 }}
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                        color: "#264653",
+                        marginBottom: 4,
+                      }}
                     >
-                      <span>{field.icon}</span>
-                      <span>{field.value}</span>
+                      {req.cropName || t("Crop Name")}
+                    </div>
+                    <div style={{ fontSize: 13, color: "#666" }}>
+                      {new Date(req.createdAt).toLocaleDateString()}
                     </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: 16 }}
-              >
-                <div className="fr-form-group" style={{ marginBottom: 0 }}>
-                  <label className="fr-label">{t("Company Name")} *</label>
-                  <input
-                    className={`fr-input ${errors.companyName ? "error" : ""}`}
-                    value={form.companyName}
-                    onChange={set("companyName")}
-                    placeholder={t("Company name")}
-                  />
-                  {errors.companyName && (
-                    <div className="fr-input-error">
-                      <span>⚠</span> {errors.companyName}
+                  <div style={{ textAlign: "right" }}>
+                    <div
+                      style={{
+                        fontSize: 16,
+                        fontWeight: "bold",
+                        color: "#2A9D8F",
+                      }}
+                    >
+                      {req.quantity} {req.unit}
                     </div>
-                  )}
-                </div>
-
-                <div className="fr-form-group" style={{ marginBottom: 0 }}>
-                  <label className="fr-label">{t("Contact Person")} *</label>
-                  <input
-                    className={`fr-input ${errors.contactPerson ? "error" : ""}`}
-                    value={form.contactPerson}
-                    onChange={set("contactPerson")}
-                    placeholder={t("Contact person name")}
-                  />
-                  {errors.contactPerson && (
-                    <div className="fr-input-error">
-                      <span>⚠</span> {errors.contactPerson}
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: "#E76F51",
+                        fontWeight: "600",
+                        marginTop: 4,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {req.status}
                     </div>
-                  )}
-                </div>
-
-                <div className="fr-form-group" style={{ marginBottom: 0 }}>
-                  <label className="fr-label">{t("Mobile Number")}</label>
-                  <input
-                    className="fr-input"
-                    value={`+91 ${buyer?.phone?.replace("+91", "") || ""}`}
-                    disabled
-                    style={{
-                      background: "var(--fr-off)",
-                      color: "var(--fr-text-light)",
-                    }}
-                  />
-                  <div className="fr-input-hint">
-                    ✅ {t("Verified — cannot be changed")}
                   </div>
                 </div>
+              ))}
+            </div>
+          )}
+        </div> */}
 
-                <div className="fr-form-group" style={{ marginBottom: 0 }}>
-                  <label className="fr-label">{t("Email")}</label>
-                  <input
-                    className={`fr-input ${errors.email ? "error" : ""}`}
-                    value={form.email}
-                    onChange={set("email")}
-                    type="email"
-                    placeholder={t("Business email")}
-                    autoCapitalize="none"
-                  />
-                  {errors.email && (
-                    <div className="fr-input-error">
-                      <span>⚠</span> {errors.email}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="fr-card" style={{ marginTop: 20 }}>
-        <div className="fr-card-header">
-          <span className="fr-card-title">⚙️ {t("Account Actions")}</span>
-        </div>
-        <div className="fr-card-body">
+        {/* SIGN OUT */}
+        <div style={{ marginBottom: 40 }}>
           <button
             onClick={logout}
-            className="fr-btn"
-            style={{ background: "#E76F51", color: "white", width: "auto" }}
+            style={{
+              width: "100%",
+              padding: "16px",
+              borderRadius: 12,
+              border: "none",
+              backgroundColor: "#264653",
+              color: "#FFF",
+              fontSize: 16,
+              fontWeight: "bold",
+              cursor: "pointer",
+              boxShadow: "0 4px 12px rgba(38, 70, 83, 0.2)",
+            }}
           >
-            🚪 {t("Logout")}
+            🚪 {t("Sign Out")}
           </button>
         </div>
       </div>
+
+      {/* EDIT PROFILE MODAL */}
+      {modalVisible && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: 1000,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 20,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#FFF",
+              width: "100%",
+              maxWidth: 500,
+              borderRadius: 20,
+              padding: 24,
+              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              animation: "fadeIn 0.2s ease-out",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 24,
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "#264653",
+                  margin: 0,
+                }}
+              >
+                {t("Edit Details")}
+              </h2>
+              <button
+                onClick={() => !saving && setModalVisible(false)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: 20,
+                  cursor: saving ? "not-allowed" : "pointer",
+                }}
+              >
+                ✖️
+              </button>
+            </div>
+
+            {apiError && (
+              <div
+                style={{
+                  padding: 12,
+                  backgroundColor: "#FDECEA",
+                  color: "#E76F51",
+                  borderRadius: 8,
+                  marginBottom: 16,
+                  fontSize: 14,
+                }}
+              >
+                {apiError}
+              </div>
+            )}
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div>
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: 13,
+                    fontWeight: "bold",
+                    color: "#666",
+                    marginBottom: 6,
+                  }}
+                >
+                  {t("Organization Name")}
+                </label>
+                <input
+                  value={form.companyName}
+                  onChange={(e) => {
+                    setForm({ ...form, companyName: e.target.value });
+                    setErrors({ ...errors, companyName: null });
+                  }}
+                  disabled={saving}
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: 14,
+                    borderRadius: 10,
+                    border: `1.5px solid ${errors.companyName ? "#E76F51" : "#E0E0E0"}`,
+                    fontSize: 15,
+                    outline: "none",
+                  }}
+                />
+                {errors.companyName && (
+                  <div style={{ fontSize: 12, color: "#E76F51", marginTop: 4 }}>
+                    {errors.companyName}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: 13,
+                    fontWeight: "bold",
+                    color: "#666",
+                    marginBottom: 6,
+                  }}
+                >
+                  {t("Contact Person")}
+                </label>
+                <input
+                  value={form.contactPerson}
+                  onChange={(e) => {
+                    setForm({ ...form, contactPerson: e.target.value });
+                    setErrors({ ...errors, contactPerson: null });
+                  }}
+                  disabled={saving}
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: 14,
+                    borderRadius: 10,
+                    border: `1.5px solid ${errors.contactPerson ? "#E76F51" : "#E0E0E0"}`,
+                    fontSize: 15,
+                    outline: "none",
+                  }}
+                />
+                {errors.contactPerson && (
+                  <div style={{ fontSize: 12, color: "#E76F51", marginTop: 4 }}>
+                    {errors.contactPerson}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: 13,
+                    fontWeight: "bold",
+                    color: "#666",
+                    marginBottom: 6,
+                  }}
+                >
+                  {t("Email Address")}
+                </label>
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => {
+                    setForm({ ...form, email: e.target.value });
+                    setErrors({ ...errors, email: null });
+                  }}
+                  disabled={saving}
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: 14,
+                    borderRadius: 10,
+                    border: `1.5px solid ${errors.email ? "#E76F51" : "#E0E0E0"}`,
+                    fontSize: 15,
+                    outline: "none",
+                  }}
+                />
+                {errors.email && (
+                  <div style={{ fontSize: 12, color: "#E76F51", marginTop: 4 }}>
+                    {errors.email}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
+              <button
+                onClick={() => setModalVisible(false)}
+                disabled={saving}
+                style={{
+                  flex: 1,
+                  padding: 14,
+                  borderRadius: 10,
+                  border: "1.5px solid #E0E0E0",
+                  backgroundColor: "transparent",
+                  fontWeight: "bold",
+                  color: "#666",
+                  cursor: saving ? "not-allowed" : "pointer",
+                }}
+              >
+                {t("Cancel")}
+              </button>
+              <button
+                onClick={handleUpdate}
+                disabled={saving}
+                style={{
+                  flex: 2,
+                  padding: 14,
+                  borderRadius: 10,
+                  border: "none",
+                  backgroundColor: "#E76F51",
+                  fontWeight: "bold",
+                  color: "#FFF",
+                  cursor: saving ? "not-allowed" : "pointer",
+                  opacity: saving ? 0.7 : 1,
+                }}
+              >
+                {saving ? t("Saving...") : t("Save Changes")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
     </div>
   );
 }

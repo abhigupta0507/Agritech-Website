@@ -29,6 +29,9 @@ import MyOffersPage from "./pages/farmer/MyOffersPage";
 import QualityPage from "./pages/farmer/QualityPage";
 import VendorMarketplacePage from "./pages/farmer/VendorMarketplacePage";
 import ViewMspPage from "./pages/farmer/ViewMspPage";
+import WeatherPage from "./pages/farmer/WeatherPage";
+import FarmerBiddingRoomPage from "./pages/farmer/FarmerBiddingRoomPage";
+import FarmerListingDetailsPage from "./pages/farmer/FarmerListingDetailsPage";
 
 // Vendor
 import VendorProtectedRoute from "./components/vendor/ProtectedRoute";
@@ -52,7 +55,16 @@ import BuyerLoginPage from "./pages/buyer/LoginPage";
 import BuyerOtpPage from "./pages/buyer/OtpPage";
 import BuyerRegisterPage from "./pages/buyer/RegisterPage";
 import BuyerProfilePage from "./pages/buyer/ProfilePage";
-
+import BuyerBiddingPage from "./pages/buyer/BiddingPage";
+import BuyerDashboardPage from "./pages/buyer/Dashboard";
+import BuyerMarketplacePage from "./pages/buyer/Marketplace";
+import ListingDetailsPage from "./pages/buyer/ListingDetailsPage";
+import Marketplace from "./pages/buyer/Marketplace";
+import PostRequirementPage from "./pages/buyer/PostRequirementPage";
+import RequirementOffersPage from "./pages/buyer/RequirementOffersPage";
+import Requirements from "./pages/buyer/RequirementsPage";
+import EditRequirementPage from "./pages/buyer/EditRequirementsPage";
+import BuyerBiddingRoomPage from "./pages/buyer/BiddingRoom";
 // Govt
 import GovtProtectedRoute from "./components/govt/ProtectedRoute";
 import GovtPortalTopbar from "./components/govt/PortalTopbar";
@@ -63,6 +75,7 @@ import GovtCompleteProfilePage from "./pages/govt/CompleteProfilePage";
 import GovtVerificationPendingPage from "./pages/govt/VerificationPendingPage";
 
 import "./styles/portal.css";
+import BiddingRoomPage from "./pages/buyer/BiddingRoom";
 
 export default function FasalRathPortal() {
   return (
@@ -129,6 +142,16 @@ export default function FasalRathPortal() {
                     <FarmerProtectedRoute>
                       <FarmerPortalLayout>
                         <FarmerFarmPage />
+                      </FarmerPortalLayout>
+                    </FarmerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="weather"
+                  element={
+                    <FarmerProtectedRoute>
+                      <FarmerPortalLayout>
+                        <WeatherPage />
                       </FarmerPortalLayout>
                     </FarmerProtectedRoute>
                   }
@@ -219,6 +242,26 @@ export default function FasalRathPortal() {
                     <FarmerProtectedRoute>
                       <FarmerPortalLayout>
                         <ViewMspPage />
+                      </FarmerPortalLayout>
+                    </FarmerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="listing-details/:id"
+                  element={
+                    <FarmerProtectedRoute>
+                      <FarmerPortalLayout>
+                        <FarmerListingDetailsPage />
+                      </FarmerPortalLayout>
+                    </FarmerProtectedRoute>
+                  }
+                />{" "}
+                <Route
+                  path="bidding-room/:id"
+                  element={
+                    <FarmerProtectedRoute>
+                      <FarmerPortalLayout>
+                        <FarmerBiddingRoomPage/>
                       </FarmerPortalLayout>
                     </FarmerProtectedRoute>
                   }
@@ -361,6 +404,15 @@ export default function FasalRathPortal() {
                       <BuyerOtpPage />
                     </>
                   }
+                />{" "}
+                <Route
+                  path="otp"
+                  element={
+                    <>
+                      <BuyerPortalTopbar />
+                      <BuyerOtpPage />
+                    </>
+                  }
                 />
                 <Route
                   path="register"
@@ -377,6 +429,96 @@ export default function FasalRathPortal() {
                     <BuyerProtectedRoute>
                       <BuyerPortalLayout>
                         <BuyerProfilePage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="bidding"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <BuyerBiddingPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="bidding-room/:id"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <BuyerBiddingRoomPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="dashboard"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <BuyerDashboardPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="listing-details/:id"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <ListingDetailsPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="edit-requirement/:id"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <EditRequirementPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="marketplace"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <Marketplace />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="post-requirements"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <PostRequirementPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="requirement-offers"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <RequirementOffersPage />
+                      </BuyerPortalLayout>
+                    </BuyerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="requirements"
+                  element={
+                    <BuyerProtectedRoute>
+                      <BuyerPortalLayout>
+                        <Requirements />
                       </BuyerPortalLayout>
                     </BuyerProtectedRoute>
                   }

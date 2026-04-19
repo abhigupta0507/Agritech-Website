@@ -1,4 +1,3 @@
-// src/fasalrath/components/buyer/PortalTopbar.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -22,15 +21,17 @@ export default function BuyerPortalTopbar() {
   };
 
   return (
-    <header className="fr-topbar" style={{ background: "#E76F51" }}>
+    <header className="fr-topbar" style={{ background: "#2A9D8F" }}>
       <div className="fr-topbar-inner">
         <Link
-          to={isAuthenticated ? "/fasalrath/buyer/profile" : "/fasalrath/buyer"}
+          to={
+            isAuthenticated ? "/fasalrath/buyer/dashboard" : "/fasalrath/buyer"
+          }
           className="fr-topbar-logo"
         >
-          <div className="fr-topbar-logo-icon">💼</div>
+          <div className="fr-topbar-logo-icon">🛒</div>
           <div className="fr-topbar-logo-text">
-            <span className="fr-topbar-logo-name">FasalRath</span>
+            <span className="fr-topbar-logo-name">Fasalrath</span>
             <span className="fr-topbar-logo-sub">{t("Buyer Portal")}</span>
           </div>
         </Link>
@@ -74,8 +75,7 @@ export default function BuyerPortalTopbar() {
                 onClick={() => setShowAccount(!showAccount)}
               >
                 <span className="fr-topbar-btn-label">
-                  {t("Hello")},{" "}
-                  {buyer?.contactPerson?.split(" ")[0] || t("Buyer")}
+                  {t("Hello")}, {buyer?.name?.split(" ")[0] || t("Buyer")}
                 </span>
                 <span className="fr-topbar-btn-value">{t("Account")} ▾</span>
               </button>
@@ -110,7 +110,7 @@ export default function BuyerPortalTopbar() {
                         color: "#0f172a",
                       }}
                     >
-                      {buyer?.companyName}
+                      {buyer?.name}
                     </div>
                     <div
                       style={{
@@ -144,6 +144,28 @@ export default function BuyerPortalTopbar() {
                     }
                   >
                     <span>👤</span> {t("My Profile")}
+                  </Link>
+                  <Link
+                    to="/fasalrath/buyer/dashboard"
+                    onClick={() => setShowAccount(false)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 16px",
+                      textDecoration: "none",
+                      color: "#334155",
+                      fontSize: 14,
+                      transition: "background 0.1s",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.background = "#f1f5f9")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background = "transparent")
+                    }
+                  >
+                    <span>🏠</span> {t("Dashboard")}
                   </Link>
                   <div style={{ borderTop: "1px solid #e2e8f0" }}>
                     <button
